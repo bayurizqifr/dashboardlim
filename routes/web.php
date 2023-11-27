@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +12,24 @@ use App\Http\Controllers\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// 
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+//========================================HOME
+Route::get('/home', function () {
+    return view('pages.home');
+});
+
+//========================================LIM2
+Route::get('/lim2', function () {
+    return view('pages.lim2');
+});
+
+//========================================LIM1
+Route::get('/lim1', function () {
+    return view('pages.lim1');
 });
 
 // ============================================================ LAYOUT
