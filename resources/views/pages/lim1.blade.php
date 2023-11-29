@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.layoutlim')
 @section('content')
 
 <div class="row">
@@ -10,12 +10,15 @@
 <div class="container">
   <div class="row">
       <div class="col">
-          <div><canvas id="peopleperformance"></canvas></div>
-      </div>
-      <div class="col">
-          <div><canvas id="myChart"></canvas></div>
+          <div class="w-50"><canvas id="peopleperformance"></canvas></div>
       </div>
   </div>
+
+  <div class="row">
+    <div class="col">
+       <div class="w-50"><canvas id="barChart"></canvas></div>
+    </div>
+ </div>
 </div>
 
 
@@ -65,26 +68,36 @@
 
 {{-- Chart Bar --}}
 <script>
-  const ctx = document.getElementById('myChart');
+  document.addEventListener('DOMContentLoaded', function() {
+     const ctx = document.getElementById('barChart').getContext('2d');
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+     new Chart(ctx, {
+        type: 'bar',
+        data: {
+           labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4'],
+           datasets: [{
+              label: 'Bar Dataset',
+              data: [25, 40, 15, 30],
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+           }]
+        },
+        options: {
+           scales: {
+              x: {
+                 type: 'category',
+                 position: 'bottom'
+              },
+              y: {
+                 type: 'linear',
+                 position: 'left'
+              }
+           }
         }
-      }
-    }
+     });
   });
 </script>
+
 
 @stop

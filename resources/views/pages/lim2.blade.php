@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.layoutlim')
 @section('content')
 
 <div class="row">
@@ -8,17 +8,20 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col">
+    <div class="row ">
+        <div class="col-5 p-5">
             <div><canvas id="peopleperformance"></canvas></div>
         </div>
-        <div class="col">
-            <div id="scatter"></div>
-        </div>
-        <div class="col">
-            <div id="my_dataviz"></div>
+        <div class="col-7 text-center p-5">
+            <div id="boxplot"></div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+           <canvas id="scatterChart"></canvas>
+        </div>
+     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -69,40 +72,41 @@
 
 {{-- Scatter --}}
 <script>
-    const ctx = document.getElementById('scatter');
-
-    new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [{
+    document.addEventListener('DOMContentLoaded', function() {
+       const ctx = document.getElementById('scatterChart').getContext('2d');
+ 
+       new Chart(ctx, {
+          type: 'scatter',
+          data: {
+             datasets: [{
                 label: 'Scatter Dataset',
                 data: [{
-                    x: -10,
-                    y: 0
+                   x: -10,
+                   y: 0
                 }, {
-                    x: 0,
-                    y: 10
+                   x: 0,
+                   y: 10
                 }, {
-                    x: 10,
-                    y: 5
+                   x: 10,
+                   y: 5
                 }, {
-                    x: 0.5,
-                    y: 5.5
+                   x: 0.5,
+                   y: 5.5
                 }],
                 backgroundColor: 'rgb(255, 99, 132)'
-            }]
-        },
-        options: {
-            scales: {
+             }],
+          },
+          options: {
+             scales: {
                 x: {
-                    type: 'linear',
-                    position: 'bottom'
+                   type: 'linear',
+                   position: 'bottom'
                 }
-            }
-        }
+             }
+          },
+       });
     });
-
-</script>
+ </script> 
 
 {{-- Boxplot --}}
 <script>
@@ -117,7 +121,7 @@
         height = 400 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
-    var svg = d3.select("#my_dataviz")
+    var svg = d3.select("#boxplot")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
