@@ -57,6 +57,7 @@
                 <a href="home" class="nav-item nav-link active">Home</a>
                 <a href="lim1" class="nav-item nav-link">Lim 1</a>
                 <a href="lim2" class="nav-item nav-link">Lim 2</a>
+                <a href="/upload" class="nav-item nav-link">Upload</a>
             </div>
         </div>
     </nav>

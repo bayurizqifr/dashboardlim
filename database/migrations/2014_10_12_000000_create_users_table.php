@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nik');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('username')->unique();
             $table->string('password');
-            $table->string('role');
+            $table->enum('role', ['user_admin', 'admin', 'super_admin']);
             $table->rememberToken();
             $table->timestamps();
         });

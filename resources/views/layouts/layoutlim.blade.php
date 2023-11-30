@@ -54,9 +54,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="home" class="nav-item nav-link active">Home</a>
-                <a href="lim1" class="nav-item nav-link">Lim 1</a>
-                <a href="lim2" class="nav-item nav-link">Lim 2</a>
+                <a href="home" class="nav-item nav-link {{ Request::is('home') ? 'active' : ''}}">Home</a>
+                <a href="lim1" class="nav-item nav-link {{ Request::is('lim1') ? 'active' : ''}}">Lim 1</a>
+                <a href="lim2" class="nav-item nav-link {{ Request::is('lim2') ? 'active' : ''}}">Lim 2</a>
+                <a href="/upload" class="nav-item nav-link {{ Request::is('upload') ? 'active' : ''}}">Upload</a>
             </div>
         </div>
     </nav>
