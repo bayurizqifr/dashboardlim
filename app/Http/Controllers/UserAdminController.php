@@ -19,13 +19,6 @@ class UserAdminController extends Controller
         }
     }
 
-    public function logout_useradmin()
-    {
-        session()->flush();
-        session()->forget(['user_admin', 'role']);
-        return redirect('/login');
-    }
-
     public function login_useradmin_cek(Request $request)
     {
         $user = DB::table('users')->where([['username', $request->username], ['password', $request->password], ['role', 'user_admin']])->first();
@@ -33,7 +26,7 @@ class UserAdminController extends Controller
         if (isset($user->role)) {
             session([
                 'user_admin' => true,
-                'role' => $user->role,
+                'user_admin_role' => $user->role,
             ]);
 
             //  var_dump($user); die;
@@ -53,7 +46,7 @@ class UserAdminController extends Controller
     public function logout()
     {
         session()->flush();
-        session()->forget(['admin', 'role']);
+        session()->forget(['user_admin', 'user_admin_role']);
         return redirect('/home');
     }
 }

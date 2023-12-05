@@ -49,6 +49,7 @@
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="/upload">SIGN IN</button>
                 </div>
+                <p class="mt-4 mb-0">Go to <a href="/home">home</a></p>
               </form>
             </div>
           </div>
