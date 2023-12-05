@@ -28,9 +28,9 @@ class UserAdminController extends Controller
 
     public function login_useradmin_cek(Request $request)
     {
-        $user = DB::table('users')->where([['username', $request->username], ['password', $request->password]])->first();
+        $user = DB::table('users')->where([['username', $request->username], ['password', $request->password], ['role', 'user_admin']])->first();
 
-        if ($user->role == 'user_admin') {
+        if (isset($user->role)) {
             session([
                 'user_admin' => true,
                 'role' => $user->role,
@@ -48,5 +48,12 @@ class UserAdminController extends Controller
     public function home()
     {
         return view('pages.send-files');
+    }
+
+    public function logout()
+    {
+        session()->flush();
+        session()->forget(['admin', 'role']);
+        return redirect('/home');
     }
 }

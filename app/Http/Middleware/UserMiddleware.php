@@ -15,7 +15,7 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!session('useradmin')){
+        if(!session('user_admin')){
             return redirect('/login');
         }else{
             return $next($request);

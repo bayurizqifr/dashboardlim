@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\WitelController;
@@ -45,6 +44,7 @@ Route::get('/lim1', function () {
 // ============================================================ USERADMIN
 Route::post('/login', [UserAdminController::class, 'login_useradmin_cek']);
 Route::get('/login', [UserAdminController::class, 'login_useradmin']);
+Route::get('/logout', [UserAdminController::class, 'logout']);
 
 // ============================================================ UPLOAD
 Route::middleware(UserMiddleware::class)->group(function () {

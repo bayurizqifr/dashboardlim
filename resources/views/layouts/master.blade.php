@@ -24,6 +24,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
@@ -58,6 +59,10 @@
                 <a href="lim1" class="nav-item nav-link">Lim 1</a>
                 <a href="lim2" class="nav-item nav-link">Lim 2</a>
                 <a href="/upload" class="nav-item nav-link">Upload</a>
+                @if (session('user_admin'))
+                    <div class="nav-item nav-link text-dark px-0 mx-2"> | </div>
+                    <a href="/logout" class="nav-item nav-link" title="logout"><i class="fa-solid fa-power-off"></i></a>
+                @endif
             </div>
         </div>
     </nav>
