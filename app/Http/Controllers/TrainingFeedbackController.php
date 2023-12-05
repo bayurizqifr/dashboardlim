@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TrainingFeedback;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTrainingFeedbackRequest;
 use App\Http\Requests\UpdateTrainingFeedbackRequest;
@@ -13,9 +14,10 @@ class TrainingFeedbackController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        //
+        //   
     }
 
     /**

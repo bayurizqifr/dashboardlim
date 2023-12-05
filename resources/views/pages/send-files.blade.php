@@ -114,6 +114,7 @@
 
           <br><br>
           <h5>Data Terupload</h5><br>
+          <h5>Data Terupload</h5><br>
 
           <table class="table table-sm table-bordered" id="daftar_upload">
             <thead class="bg-info text-dark">
