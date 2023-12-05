@@ -74,4 +74,28 @@ class AdminController extends Controller
         return view('admin.add-user', $data);
     }
 
+    public function add_pelatihan(){
+        $pelatihan = DB::table('nama_pelatihans')->get();
+        $data = [
+            'pelatihan' => $pelatihan
+        ];
+        return view('admin.add-pelatihan', $data);
+    }
+
+    public function add_region(){
+        $region = DB::table('regions')->get();
+        $data = [
+            'region' => $region
+        ];
+        return view('admin.add-region', $data);
+    }
+
+    public function add_witel(){
+        $witel = DB::table('witels')->get();
+        $data = [
+            'witel' => $witel
+        ];
+        return view('admin.add-witel', $data);
+    }
+
 }

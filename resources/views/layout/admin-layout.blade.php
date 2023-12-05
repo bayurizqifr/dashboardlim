@@ -189,6 +189,9 @@
                 <li class="nav-item"> <a class="nav-link" href="/admin/lim-1">Lim 1</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/lim-2">Lim 2</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/add-user">Add User</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/add-pelatihan">Add Pelatihan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/add-region">Add Region</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/add-witel">Add Witel</a></li>
               </ul>
             </div>
           </li>

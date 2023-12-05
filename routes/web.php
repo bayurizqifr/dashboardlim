@@ -2,9 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WitelController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\NamaPelatihanController;
+use App\Http\Controllers\TrainingFeedbackController;
+use App\Http\Controllers\TrainingEvaluationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +44,8 @@ Route::get('/upload', function () {
     return view('pages.send-files');
 });
 
+Route::resource('/upload', TrainingEvaluationController::class)->except(['index']);
+
 Route::get('/login', function () {
     return view('pages.login');
 });
@@ -63,4 +69,10 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/admin/lim-2-detail', [AdminController::class, 'lim_2_detail']);
     Route::get('/admin/add-user', [AdminController::class, 'add_user']);
     Route::resource('/admin/add-user', UserController::class)->except(['index']);
+    Route::get('/admin/add-pelatihan', [AdminController::class, 'add_pelatihan']);
+    Route::resource('/admin/add-pelatihan', NamaPelatihanController::class)->except(['index']);
+    Route::get('/admin/add-region', [AdminController::class, 'add_region']);
+    Route::resource('/admin/add-region', RegionController::class)->except(['index']);
+    Route::get('/admin/add-witel', [AdminController::class, 'add_witel']);
+    Route::resource('/admin/add-witel', WitelController::class)->except(['index']);
 });

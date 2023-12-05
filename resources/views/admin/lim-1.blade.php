@@ -10,6 +10,15 @@
     </div>
 @endif
 
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Gagal menyimpan data. Isikan data dengan benar
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 <div class="row">
     <div class="col">
         <div class="card">
@@ -24,7 +33,7 @@
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                               <div class="modal-content text-left">
                                 <div class="modal-header">
                                   <h5 class="modal-title" id="exampleModalLongTitle">Add data</h5>
@@ -34,31 +43,86 @@
                                 </div>
                                 <div class="modal-body">
                                   <h6>Download template <a href="">here</a></h6>
-                                  <br>
+                                  <hr>
                                   <form action="/admin/lim-1" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <h6>Bulan Pelaksanaan</h6>
-                                    <select name="bulan" id="" class="form-control form-control-sm border-dark">
-                                        <option value="">Pilih bulan</option>
-                                        <option value="1">Januari</option>
-                                        <option value="2">Februari</option>
-                                        <option value="3">Maret</option>
-                                        <option value="4">April</option>
-                                        <option value="5">Mei</option>
-                                        <option value="6">Juni</option>
-                                        <option value="7">Juli</option>
-                                        <option value="8">Agustus</option>
-                                        <option value="9">September</option>
-                                        <option value="10">Oktober</option>
-                                        <option value="11">November</option>
-                                        <option value="12">Desember</option>
-                                    </select>
-                                    <br>
-                                    <h6>Tahun Pelaksanaan</h6>
-                                    <input name="tahun" type="number" class="form-control form-control-sm border-dark" min="2000" max="3000">
+                                    <div class="row">
+                                        <div class="col-4 mt-3">
+                                            <h6>Nama Pelatihan</h6>
+                                            <select name="nama_pelatihan" class="form-control form-control-sm text-dark @if($errors->has('nama_pelatihan')) is-invalid @else border-dark @endif">
+                                                <option value="">Pilih pelatihan</option>
+                                                <option value="INSTALASI ODP PROVISIONING TYPE-2 MITRA">INSTALASI ODP PROVISIONING TYPE-2 MITRA</option>
+                                            </select>
+                                            @error('nama_pelatihan')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-4 mt-3">
+                                            <h6>Region</h6>
+                                            <select name="region" class="form-control form-control-sm text-dark @if($errors->has('region')) is-invalid @else border-dark @endif">
+                                                <option value="">Pilih region</option>
+                                                <option value="Regional 1">Regional 1</option>
+                                            </select>
+                                            @error('region')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-4 mt-3">
+                                            <h6>Witel</h6>
+                                            <select name="witel" class="form-control form-control-sm text-dark @if($errors->has('witel')) is-invalid @else border-dark @endif">
+                                                <option value="">Pilih witel</option>
+                                                <option value="Tangerang">Tangerang</option>
+                                            </select>
+                                            @error('witel')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            <h6>Tgl mulai training</h6>
+                                            <input name="tgl_mulai_training" type="date" class="form-control form-control-sm text-dark @if($errors->has('tgl_mulai_training')) is-invalid @else border-dark @endif">
+                                            @error('tgl_mulai_training')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            <h6>Tgl akhir training</h6>
+                                            <input name="tgl_akhir_training" type="date" class="form-control form-control-sm text-dark @if($errors->has('tgl_akhir_training')) is-invalid @else border-dark @endif">
+                                            @error('tgl_akhir_training')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            <h6>Bulan Pelaksanaan</h6>
+                                            <select name="bulan" class="form-control form-control-sm text-dark @if($errors->has('bulan')) is-invalid @else border-dark @endif" aria-label=".form-control-sm text-dark example"  name="" id="">
+                                                <option value="">Pilih bulan</option>
+                                                <option value="1">Januari</option>
+                                                <option value="2">Februari</option>
+                                                <option value="3">Maret</option>
+                                                <option value="4">April</option>
+                                                <option value="5">Mei</option>
+                                                <option value="6">Juni</option>
+                                                <option value="7">Juli</option>
+                                                <option value="8">Agustus</option>
+                                                <option value="9">September</option>
+                                                <option value="10">Oktober</option>
+                                                <option value="11">November</option>
+                                                <option value="12">Desember</option>
+                                            </select>
+                                            @error('bulan')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            <h6>Tahun Pelaksanaan</h6>
+                                            <input name="tahun" type="number" class="form-control form-control-sm text-dark @if($errors->has('tahun')) is-invalid @else border-dark @endif" min="2000" max="2200">
+                                            @error('tahun')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <br>
                                     <h6>Input CSV file</h6>
-                                    <input type="file" name="csv" class="form-control form-control-sm border-dark">
+                                    <input type="file" name="csv" class="form-control form-control-sm text-dark border-dark">
                                     <br>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Submit</button>
