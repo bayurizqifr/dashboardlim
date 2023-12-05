@@ -14,9 +14,12 @@
             <div class="card-body">
                 <form action="" method="post">
                     @csrf
-                    download file <a href="">download</a><br><br>
-                    bulan pelaksanaan<br>
-                    <select name="" id="" class="form-control form-control-sm">
+                    <h6>(Download Format Evaluasi Training)</h6>
+                    <a href="" class="btn btn-outline-success p-2"><i class="typcn typcn-document" style="font-size: 14px"></i> Download file format</a>
+                    <br>
+                    <br>
+                    <h5>Bulan Pelaksanaan</h5>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"  name="" id="">
                         <option value="">Pilih bulan</option>
                         <option value="1">Januari</option>
                         <option value="2">Februari</option>
@@ -30,18 +33,23 @@
                         <option value="10">Oktober</option>
                         <option value="11">November</option>
                         <option value="12">Desember</option>
-                    </select><br>
-                    tahun pelaksanaan<br>
-                    <input type="text" class="form-control form-control-sm"><br>
-                    upload file csv <br>
-                    <input type="file" name="csv" class="form-control form-control-sm"><br><br>
-                    <button type="submit">Kirim</button>
+                    </select>
+                    <br>
+                    <h5>Tahun Pelaksanaan</h5>
+                    <input type="text" class="form-control form-control-sm">
+                    <br>
+                    <h5>Upload .csv</h5>
+                    <input type="file" name="csv" class="form-control form-control-sm">
+                    <br>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-md btn-warning hover-bg"><h6 class="m-0">Save</h6></button>
+                    </div>
                 </form>
             </div>
           </div>
 
           <br><br>
-          <h5>data terupload</h5><br>
+          <h5>Data Terupload</h5><br>
 
           <table class="table">
             <thead>

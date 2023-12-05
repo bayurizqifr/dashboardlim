@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,13 +38,17 @@ Route::get('/lim1', function () {
     return view('pages.lim1');
 });
 
-Route::get('/upload', function () {
-    return view('pages.send-files');
+// ============================================================ USERADMIN
+Route::post('/login', [UserAdminController::class, 'login_useradmin_cek']);
+Route::get('/login', [UserAdminController::class, 'login_useradmin']);
+
+// ============================================================ UPLOAD
+Route::middleware(UserMiddleware::class)->group(function () {
+    Route::get('/upload', [UserAdminController::class, 'home']);
 });
 
-Route::get('/login', function () {
-    return view('pages.login');
-});
+
+
 
 // ============================================================ LAYOUT
 Route::get('/layout', function () 
