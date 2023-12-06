@@ -8,7 +8,33 @@ use App\Http\Controllers\Controller;
 
 class UserAdminController extends Controller
 {
-    //
+    public function upload()
+    {
+        $data_upload = DB::table('training_evaluations')->where('username_uploader', session('user_admin_username'))->distinct('bulan_pelaksanaan', 'tahun_pelaksanaan')->get();
+        $data_nama_pelatihan = DB::table('nama_pelatihans')->get();
+        $data_region = DB::table('regions')->get();
+        $data_witel = DB::table('witels')->get();
+
+        $data = [
+            'data_upload' => $data_upload,
+            'data_nama_pelatihan' => $data_nama_pelatihan,
+            'data_region' => $data_region,
+            'data_witel' => $data_witel,
+        ];
+        return view('pages.send-files', $data);
+    }
+
+    public function upload_detail(Request $request)
+    {
+        $data_upload = DB::table('training_evaluations')->where([['username_uploader', session('user_admin_username')],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t]])->get();
+        $data_detail = DB::table('training_evaluations')->where([['username_uploader', session('user_admin_username')],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t]])->first();
+
+        $data = [
+            'data_detail' => $data_detail,
+            'data_upload' => $data_upload,
+        ];
+        return view('pages.send-files-detail', $data);
+    }
 
     public function login_useradmin()
     {
@@ -27,6 +53,7 @@ class UserAdminController extends Controller
             session([
                 'user_admin' => true,
                 'user_admin_role' => $user->role,
+                'user_admin_username' => $user->username,
             ]);
 
             //  var_dump($user); die;
@@ -38,15 +65,10 @@ class UserAdminController extends Controller
         }
     }
 
-    public function home()
-    {
-        return view('pages.send-files');
-    }
-
     public function logout()
     {
-        session()->flush();
-        session()->forget(['user_admin', 'user_admin_role']);
+        // session()->flush();
+        session()->forget(['user_admin', 'user_admin_role', 'user_admin_username']);
         return redirect('/home');
     }
 }

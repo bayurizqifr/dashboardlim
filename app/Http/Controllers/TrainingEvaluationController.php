@@ -72,11 +72,12 @@ class TrainingEvaluationController extends Controller
 
         foreach($rawdata as $rd){
             TrainingEvaluation::create([
+                'username_uploader' => session('user_admin_username'),
                 'bulan_pelaksanaan' => $rd[0],
                 'tahun_pelaksanaan' => $rd[1],
                 'regional' => $rd[2],
-                'nama_pelatihan' => $rd[3],
-                'witel' => $rd[4],
+                'witel' => $rd[3],
+                'nama_pelatihan' => $rd[4],
                 'tgl_mulai_pelaksanaan' => $rd[5] == ''? null : $rd[5],
                 'tgl_selesai_pelaksanaan' => $rd[6] == ''? null : $rd[6],
                 'nik' => $rd[7],

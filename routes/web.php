@@ -7,6 +7,7 @@ use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\WitelController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\NamaPelatihanController;
+use App\Http\Controllers\TrainingEvaluationController;
 use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserMiddleware;
@@ -48,7 +49,9 @@ Route::get('/logout', [UserAdminController::class, 'logout']);
 
 // ============================================================ UPLOAD
 Route::middleware(UserMiddleware::class)->group(function () {
-    Route::get('/upload', [UserAdminController::class, 'home']);
+    Route::get('/upload', [UserAdminController::class, 'upload']);
+    Route::get('/upload-detail', [UserAdminController::class, 'upload_detail']);
+    Route::resource('/upload', TrainingEvaluationController::class)->except(['index']);
 });
 
 
@@ -71,7 +74,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/admin/lim-1', [AdminController::class, 'lim_1']);
     Route::resource('/admin/lim-1', TrainingFeedbackController::class)->except(['index']);
     Route::get('/admin/lim-2', [AdminController::class, 'lim_2']);
-    Route::get('/admin/lim-2-detail', [AdminController::class, 'lim_2_detail']);
+    Route::post('/admin/lim-2-detail', [AdminController::class, 'lim_2_detail']);
+    Route::post('/admin/lim-2-delete', [AdminController::class, 'lim_2_delete']);
     Route::get('/admin/add-user', [AdminController::class, 'add_user']);
     Route::resource('/admin/add-user', UserController::class)->except(['index']);
     Route::get('/admin/add-pelatihan', [AdminController::class, 'add_pelatihan']);

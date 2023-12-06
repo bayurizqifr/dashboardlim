@@ -1,3 +1,4 @@
+@inject('helper', 'App\Http\Controllers\helper')
 @extends('layout.admin-layout')
 @section('content')
 
@@ -10,7 +11,7 @@
                         <h4 class="card-title">Lim 2 | Training Evaluation | Detail</h4>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="/admin/lim-2" class="text-primary"><i class="mdi mdi-arrow-left" style="font-size: 16px"></i> Back</a>
+                        <a href="/admin/lim-2?b={{ request()->get('b') }}&t={{ request()->get('t') }}" class="text-primary"><i class="mdi mdi-arrow-left" style="font-size: 16px"></i> Back</a>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -18,13 +19,13 @@
                         <div class="card border-dark rounded">
                             <div class="card-body">
                                 <table>
-                                    <tr><td><b>Nama Pelatihan</b></td><td class="px-3">:</td><td class="text-secondary">Pelatihan Indihome Non Teknis ( Go Fiber Team Suport )</td></tr>
-                                    <tr><td><b>Bulan</b></td><td class="px-3">:</td><td class="text-secondary">Oktober 2023</td></tr>
-                                    <tr><td><b>Tgl Pelaksanaan</b></td><td class="px-3">:</td><td class="text-secondary">10/26/2023 - 10/26/2023</td></tr>
-                                    <tr><td><b>Regional</b></td><td class="px-3">:</td><td class="text-secondary">Regional 4</td></tr>
-                                    <tr><td><b>Witel</b></td><td class="px-3">:</td><td class="text-secondary">Semarang</td></tr>
-                                    <tr><td><b>Instruktur</b></td><td class="px-3">:</td><td class="text-secondary">Ali Hamzah</td></tr>
-                                    <tr><td><b>Nama Pengupload</b></td><td class="px-3">:</td><td class="text-secondary">Bambang Supriadi</td></tr>
+                                    <tr><td><b>Nama Pelatihan</b></td><td class="px-3">:</td><td class="text-secondary">{{ $data_detail->nama_pelatihan }}</td></tr>
+                                    <tr><td><b>Bulan</b></td><td class="px-3">:</td><td class="text-secondary">{{ $helper->bulan(request()->get('b')) }} {{ request()->get('t') }}</td></tr>
+                                    <tr><td><b>Tgl Pelaksanaan</b></td><td class="px-3">:</td><td class="text-secondary">{{ $data_detail->tgl_mulai_pelaksanaan .' - '. $data_detail->tgl_selesai_pelaksanaan }}</td></tr>
+                                    <tr><td><b>Regional</b></td><td class="px-3">:</td><td class="text-secondary">{{ $data_detail->regional }}</td></tr>
+                                    <tr><td><b>Witel</b></td><td class="px-3">:</td><td class="text-secondary">{{ $data_detail->witel }}</td></tr>
+                                    <tr><td><b>Instruktur</b></td><td class="px-3">:</td><td class="text-secondary">{{ $data_detail->nama_instruktur }}</td></tr>
+                                    <tr><td><b>Nama Pengupload</b></td><td class="px-3">:</td><td class="text-secondary">{{ $helper->nama_user($data_detail->username_uploader) }}</td></tr>
                                 </table>
                             </div>
                         </div>
@@ -46,26 +47,21 @@
                             </tr>
                         </thead>
                         <tbody class="table table-sm">
+                            @php
+                                $no = 1;
+                            @endphp
+                            @foreach ($data_upload as $row)
                             <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center">12345678</td>
-                                <td>Shinta Mayangkasih</td>
-                                <td class="text-center"><span class="badge badge-success">Hadir</span></td>
-                                <td class="text-center">50</td>
-                                <td class="text-center">90</td>
-                                <td class="text-center">High Profesional Learner</td>
-                                <td class="text-center">80%</td>
+                                <td class="text-center">{{ $no++ }}</td>
+                                <td class="text-center">{{ $row->nik }}</td>
+                                <td>{{ $row->nama }}</td>
+                                <td class="text-center">{!! $row->kehadiran == 'hadir' ? '<span class="badge badge-success">Hadir</span>' : $row->kehadiran !!}</td>
+                                <td class="text-center">{{ $row->nilai_pre_test }}</td>
+                                <td class="text-center">{{ $row->nilai_post_test }}</td>
+                                <td class="text-center">{{ $helper->training_evaluation_keterangan($row->nilai_pre_test, $row->nilai_post_test) }}</td>
+                                <td class="text-center">{{ ($row->nilai_post_test - $row->nilai_pre_test) / $row->nilai_pre_test * 100}}%</td>
                             </tr>
-                            <tr>
-                                <td class="text-center">2</td>
-                                <td class="text-center">12345678</td>
-                                <td>Shinta Mayangkasih</td>
-                                <td class="text-center"><span class="badge badge-success">Hadir</span></td>
-                                <td class="text-center">50</td>
-                                <td class="text-center">90</td>
-                                <td class="text-center">High Profesional Learner</td>
-                                <td class="text-center">80%</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

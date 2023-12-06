@@ -42,7 +42,7 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <h6>Download template <a href="">here</a></h6>
+                                  <h6>Download template <a href="/data-template/(LIM 1)Training_Feedback_template_csv.csv">here</a></h6>
                                   <hr>
                                   <form action="/admin/lim-1" method="post" enctype="multipart/form-data">
                                     @csrf
@@ -51,7 +51,9 @@
                                             <h6>Nama Pelatihan</h6>
                                             <select name="nama_pelatihan" class="form-control form-control-sm text-dark @if($errors->has('nama_pelatihan')) is-invalid @else border-dark @endif">
                                                 <option value="">Pilih pelatihan</option>
-                                                <option value="INSTALASI ODP PROVISIONING TYPE-2 MITRA">INSTALASI ODP PROVISIONING TYPE-2 MITRA</option>
+                                                @foreach ($data_nama_pelatihan as $row)
+                                                    <option value="{{ $row->nama_pelatihan }}">{{ $row->nama_pelatihan }}</option>
+                                                @endforeach
                                             </select>
                                             @error('nama_pelatihan')
                                                 <p class="text-danger mb-0">{{ $message }}</p>
@@ -61,7 +63,9 @@
                                             <h6>Region</h6>
                                             <select name="region" class="form-control form-control-sm text-dark @if($errors->has('region')) is-invalid @else border-dark @endif">
                                                 <option value="">Pilih region</option>
-                                                <option value="Regional 1">Regional 1</option>
+                                                @foreach ($data_region as $row)
+                                                    <option value="{{ $row->region }}">{{ $row->region }}</option>
+                                                @endforeach
                                             </select>
                                             @error('region')
                                                 <p class="text-danger mb-0">{{ $message }}</p>
@@ -71,7 +75,9 @@
                                             <h6>Witel</h6>
                                             <select name="witel" class="form-control form-control-sm text-dark @if($errors->has('witel')) is-invalid @else border-dark @endif">
                                                 <option value="">Pilih witel</option>
-                                                <option value="Tangerang">Tangerang</option>
+                                                @foreach ($data_witel as $row)
+                                                    <option value="{{ $row->witel }}">{{ $row->witel }}</option>
+                                                @endforeach
                                             </select>
                                             @error('witel')
                                                 <p class="text-danger mb-0">{{ $message }}</p>
@@ -143,26 +149,26 @@
                                     <div class="row">
                                         <div class="col-5">
                                             <h6>Bulan Pelaksanaan</h6>
-                                            <select name="bulan" id="" class="form-control form-control-sm border-dark">
+                                            <select name="b" id="" class="form-control form-control-sm border-dark">
                                                 <option value="">Pilih bulan</option>
-                                                <option value="1" {{ request()->get('bulan') == 1 ? 'selected' : ''}}>Januari</option>
-                                                <option value="2" {{ request()->get('bulan') == 2 ? 'selected' : ''}}>Februari</option>
-                                                <option value="3" {{ request()->get('bulan') == 3 ? 'selected' : ''}}>Maret</option>
-                                                <option value="4" {{ request()->get('bulan') == 4 ? 'selected' : ''}}>April</option>
-                                                <option value="5" {{ request()->get('bulan') == 5 ? 'selected' : ''}}>Mei</option>
-                                                <option value="6" {{ request()->get('bulan') == 6 ? 'selected' : ''}}>Juni</option>
-                                                <option value="7" {{ request()->get('bulan') == 7 ? 'selected' : ''}}>Juli</option>
-                                                <option value="8" {{ request()->get('bulan') == 8 ? 'selected' : ''}}>Agustus</option>
-                                                <option value="9" {{ request()->get('bulan') == 9 ? 'selected' : ''}}>September</option>
-                                                <option value="10" {{ request()->get('bulan') == 10 ? 'selected' : ''}}>Oktober</option>
-                                                <option value="11" {{ request()->get('bulan') == 11 ? 'selected' : ''}}>November</option>
-                                                <option value="12" {{ request()->get('bulan') == 12 ? 'selected' : ''}}>Desember</option>
+                                                <option value="1" {{ request()->get('b') == 1 ? 'selected' : ''}}>Januari</option>
+                                                <option value="2" {{ request()->get('b') == 2 ? 'selected' : ''}}>Februari</option>
+                                                <option value="3" {{ request()->get('b') == 3 ? 'selected' : ''}}>Maret</option>
+                                                <option value="4" {{ request()->get('b') == 4 ? 'selected' : ''}}>April</option>
+                                                <option value="5" {{ request()->get('b') == 5 ? 'selected' : ''}}>Mei</option>
+                                                <option value="6" {{ request()->get('b') == 6 ? 'selected' : ''}}>Juni</option>
+                                                <option value="7" {{ request()->get('b') == 7 ? 'selected' : ''}}>Juli</option>
+                                                <option value="8" {{ request()->get('b') == 8 ? 'selected' : ''}}>Agustus</option>
+                                                <option value="9" {{ request()->get('b') == 9 ? 'selected' : ''}}>September</option>
+                                                <option value="10" {{ request()->get('b') == 10 ? 'selected' : ''}}>Oktober</option>
+                                                <option value="11" {{ request()->get('b') == 11 ? 'selected' : ''}}>November</option>
+                                                <option value="12" {{ request()->get('b') == 12 ? 'selected' : ''}}>Desember</option>
                                             </select>
                                         </div>
                                         <div class="col-5">
                                             <h6>Tahun Pelaksanaan</h6>
-                                            <select name="tahun" id="" class="form-control form-control-sm border-dark">
-                                                <option value="{{ request()->get('tahun') ? request()->get('tahun') : ''}}">{{ request()->get('tahun') ? request()->get('tahun') : 'Pilih tahun' }}</option>
+                                            <select name="t" id="" class="form-control form-control-sm border-dark">
+                                                <option value="{{ request()->get('t') ? request()->get('t') : ''}}">{{ request()->get('t') ? request()->get('t') : 'Pilih tahun' }}</option>
                                                 @foreach ($data_tahun as $row)
                                                     <option value="{{ $row->tahun_pelaksanaan }}">{{ $row->tahun_pelaksanaan }}</option>
                                                 @endforeach
