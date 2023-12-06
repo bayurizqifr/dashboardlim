@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class UserAdminController extends Controller
 {
     //
-
+    
     public function login_useradmin()
     {
         if (session('user_admin')) {
