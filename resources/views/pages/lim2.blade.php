@@ -17,15 +17,42 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col">
-           <canvas id="scatterChart"></canvas>
+    <div class="row mb-5">
+        <div class="col-6">
+           <canvas id="scatterChart" class="mx-auto w-50"></canvas>
         </div>
+        <div class="col-6">
+            <table class="table table-sm table-bordered" id="">
+                <thead class="bg-secondary text-light">
+                    <tr>
+                        <td class="text-center"><b>REG</b></td>
+                        <td class="text-center"><b>Consistence Star</b></td>
+                        <td class="text-center"><b>Continuity Learner</b></td>
+                        <td class="text-center"><b>High Profesional Learner</b></td>
+                        <td class="text-center"><b>Inconsistent</b></td>
+                        <td class="text-center"><b>Deadwood</b></td>
+                        <td class="text-center"><b>Grand Total</b></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                    </tr>
+                </tbody>
+              </table>
+         </div>
      </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 
 {{-- Doughnut --}}
 <script>
@@ -110,81 +137,35 @@
 
 {{-- Boxplot --}}
 <script>
-    // set the dimensions and margins of the graph
-    var margin = {
-            top: 10,
-            right: 30,
-            bottom: 30,
-            left: 40
-        },
-        width = 400 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+  document.addEventListener('DOMContentLoaded', function() {
+    var trace1 = {
+      y: [1, 2, 2, 3, 3, 3, 4, 4, 5],
+      type: 'box',
+      name: 'Boxplot 1',
+      marker: {
+        color: 'grey' // Set the color of the box to grey
+      }
+    };
 
-    // append the svg object to the body of the page
-    var svg = d3.select("#boxplot")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+    var trace2 = {
+      y: [2, 3, 3, 4, 4, 4, 5, 5, 6],
+      type: 'box',
+      name: 'Boxplot 2',
+      marker: {
+        color: 'lightgrey' // Set the color of the second box to light grey
+      }
+    };
 
-    // create dummy data
-    var data = [12, 19, 11, 13, 12, 22, 13, 4, 15, 16, 18, 19, 20, 12, 11, 9]
+    var layout = {
+      title: 'Two Boxplots Example',
+      boxmode: 'group' // Set the box mode to 'group' for side-by-side boxplots
+    };
 
-    // Compute summary statistics used for the box:
-    var data_sorted = data.sort(d3.ascending)
-    var q1 = d3.quantile(data_sorted, .25)
-    var median = d3.quantile(data_sorted, .5)
-    var q3 = d3.quantile(data_sorted, .75)
-    var interQuantileRange = q3 - q1
-    var min = q1 - 1.5 * interQuantileRange
-    var max = q1 + 1.5 * interQuantileRange
+    var data = [trace1, trace2];
 
-    // Show the Y scale
-    var y = d3.scaleLinear()
-        .domain([0, 24])
-        .range([height, 0]);
-    svg.call(d3.axisLeft(y))
-
-    // a few features for the box // mengatur jarak box
-    var center = 100
-    var width = 100
-
-    // Show the main vertical line
-    svg
-        .append("line")
-        .attr("x1", center)
-        .attr("x2", center)
-        .attr("y1", y(min))
-        .attr("y2", y(max))
-        .attr("stroke", "black")
-
-    // Show the box
-    svg
-        .append("rect")
-        .attr("x", center - width / 2)
-        .attr("y", y(q3))
-        .attr("height", (y(q1) - y(q3)))
-        .attr("width", width)
-        .attr("stroke", "black")
-        .style("fill", "#B0A695")
-
-    // show median, min and max horizontal lines
-    svg
-        .selectAll("toto")
-        .data([min, median, max])
-        .enter()
-        .append("line")
-        .attr("x1", center - width / 2)
-        .attr("x2", center + width / 2)
-        .attr("y1", function (d) {
-            return (y(d))
-        })
-        .attr("y2", function (d) {
-            return (y(d))
-        })
-        .attr("stroke", "black")
-
+    Plotly.newPlot('boxplot', data, layout);
+  });
 </script>
+
+</body>
 @stop
