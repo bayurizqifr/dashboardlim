@@ -1,5 +1,6 @@
 @extends('layouts.layoutlim')
 @section('content')
+@inject('ctl', 'App\Http\Controllers\TrainingFeedbackController')
 
 <div class="row">
   <div class="col-12">
@@ -28,12 +29,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="text-center">-</td>
-                <td class="text-center">-</td>
-                <td class="text-center">-</td>
-                <td class="text-center">-</td>
-            </tr>
+         @php 
+          $no = 1;
+			  @endphp
+        @foreach ($data_lim1 as $row)
+        <tr>
+          <td class="text-center">{{ $no++ }}</td>
+          <td class="text-center">{{ $row->nama_pelatihan }}</td>
+          <td class="text-center">-</td>
+          <td class="text-center">-</td>
+       </tr>
+        @endforeach
         </tbody>
       </table>
     </div>
@@ -109,7 +115,7 @@
     ],
   datasets: [{
     label: 'My First Dataset',
-    data: [478, 156, 2212, 0, 0],
+    data: [478, 156, 212, 89, 100],
     backgroundColor: [
       '#265073',
       'E48F45',

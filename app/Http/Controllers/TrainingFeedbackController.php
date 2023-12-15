@@ -17,7 +17,7 @@ class TrainingFeedbackController extends Controller
 
     public function index()
     {
-        //   
+        return 'masuk';
     }
 
     /**
@@ -103,6 +103,22 @@ class TrainingFeedbackController extends Controller
     /**
      * Display the specified resource.
      */
+    
+    //  Show Data LIM 1
+    public function show_lim1()
+    {
+       //Untuk menampilkan database
+         $data_lim1 = DB::table('training_feedback')
+                ->select('nama_pelatihan')
+                ->distinct()
+                ->get();
+         $data = [
+           'data_lim1' => $data_lim1
+         ];
+ 
+           return view('pages.lim1', $data);
+    }
+
     public function show(TrainingFeedback $trainingFeedback)
     {
         //
