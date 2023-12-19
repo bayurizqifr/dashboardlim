@@ -38,9 +38,7 @@ Route::get('/lim2', function () {
 });
 
 //========================================LIM1
-Route::get('/lim1', function () {
-    return view('pages.lim1');
-});
+Route::get('/lim1', [TrainingFeedbackController::class, 'show_lim1']);
 
 // ============================================================ USERADMIN
 Route::post('/login', [UserAdminController::class, 'login_useradmin_cek']);
