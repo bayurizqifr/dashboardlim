@@ -46,6 +46,7 @@
                                   <hr>
                                   <form action="/admin/lim-1" method="post" enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" name="type_upload" value="normal">
                                     <div class="row">
                                         <div class="col-4 mt-3">
                                             <h6>Nama Pelatihan</h6>
@@ -97,6 +98,67 @@
                                                 <p class="text-danger mb-0">{{ $message }}</p>
                                             @enderror
                                         </div>
+                                        <div class="col-3 mt-3">
+                                            <h6>Bulan Pelaksanaan</h6>
+                                            <select name="bulan" class="form-control form-control-sm text-dark @if($errors->has('bulan')) is-invalid @else border-dark @endif" aria-label=".form-control-sm text-dark example"  name="" id="">
+                                                <option value="">Pilih bulan</option>
+                                                <option value="1">Januari</option>
+                                                <option value="2">Februari</option>
+                                                <option value="3">Maret</option>
+                                                <option value="4">April</option>
+                                                <option value="5">Mei</option>
+                                                <option value="6">Juni</option>
+                                                <option value="7">Juli</option>
+                                                <option value="8">Agustus</option>
+                                                <option value="9">September</option>
+                                                <option value="10">Oktober</option>
+                                                <option value="11">November</option>
+                                                <option value="12">Desember</option>
+                                            </select>
+                                            @error('bulan')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            <h6>Tahun Pelaksanaan</h6>
+                                            <input name="tahun" type="number" class="form-control form-control-sm text-dark @if($errors->has('tahun')) is-invalid @else border-dark @endif" min="2000" max="2200">
+                                            @error('tahun')
+                                                <p class="text-danger mb-0">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <h6>Input CSV file</h6>
+                                    <input type="file" name="csv" class="form-control form-control-sm text-dark border-dark">
+                                    <br>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalBulk">
+                            <i class="mdi mdi-package" style="font-size: 16px"></i> Add data (bulk)
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalBulk" tabindex="-1" role="dialog" aria-labelledby="modalBulkTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                              <div class="modal-content text-left">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">Add data (Bulk)</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6>Download template <a href="/data-template/(LIM 1)Training_Feedback_template_csv.csv">here</a></h6>
+                                  <hr>
+                                  <form action="/admin/lim-1" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="type_upload" value="bulk">
+                                    <div class="row">
                                         <div class="col-3 mt-3">
                                             <h6>Bulan Pelaksanaan</h6>
                                             <select name="bulan" class="form-control form-control-sm text-dark @if($errors->has('bulan')) is-invalid @else border-dark @endif" aria-label=".form-control-sm text-dark example"  name="" id="">
