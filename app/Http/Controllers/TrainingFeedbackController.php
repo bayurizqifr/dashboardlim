@@ -107,13 +107,35 @@ class TrainingFeedbackController extends Controller
     //  Show Data LIM 1
     public function show_lim1()
     {
+        $show_lim1 = DB::table('training_feedback')->get();
+
+        $lim1 = [];
+        foreach($show_lim1 as $row){
+            $data_lim1 = DB::table('training_feedback');
+
+            array_push($lim1, [
+
+                'id' => $row->id,
+                'nik' => $row->nik,
+                'nama_lengkap' => $row->nama_lengkap,
+                'nama_pelatihan' => $row->nama_pelatihan,
+                'regional' => $row->regional_penyelenggara,
+                'witel' => $row->witel_penyelenggara
+            ]);
+        }
+
+        // echo ('<pre>');
+        // var_dump($lim1); die;
+
        //Untuk menampilkan database
          $data_lim1 = DB::table('training_feedback')
                 ->select('nama_pelatihan')
                 ->distinct()
                 ->get();
+
          $data = [
-           'data_lim1' => $data_lim1
+           'data_lim1' => $data_lim1,
+           'show_lim1' => $show_lim1
          ];
  
            return view('pages.lim1', $data);
