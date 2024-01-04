@@ -1,7 +1,11 @@
 @inject('helper', 'App\Http\Controllers\helper')
 @extends('layouts.layoutlim')
 @section('content')
-
+<style>
+    .form-control, .form-select{
+        border-radius: 3px;
+    }
+</style>
 <div class="row">
   <div class="col-12">
       <h2 class="text-center"> Upload Evaluasi Training</h2>
@@ -28,10 +32,10 @@
                     <div class="row">
                         <div class="col-4 mt-3">
                             <h6>Nama Pelatihan</h6>
-                            <select name="nama_pelatihan" class="form-select form-select-sm @error('nama_pelatihan') is-invalid @enderror">
-                                <option value="">Pilih pelatihan</option>
+                            <select name="nama_pelatihan" id="select-pelatihan">
+                                <option value=""></option>
                                 @foreach ($data_nama_pelatihan as $row)
-                                    <option value="{{ $row->nama_pelatihan }}">{{ $row->nama_pelatihan }}</option>
+                                    <option value="{{ $row->nama_pelatihan }}" {{ old('nama_pelatihan') == $row->nama_pelatihan ? 'selected' : '' }}>{{ $row->nama_pelatihan }}</option>
                                 @endforeach
                             </select>
                             @error('nama_pelatihan')
@@ -40,10 +44,10 @@
                         </div>
                         <div class="col-4 mt-3">
                             <h6>Region</h6>
-                            <select name="region" class="form-select form-select-sm @error('region') is-invalid @enderror">
-                                <option value="">Pilih region</option>
+                            <select name="region" id="select-region">
+                                <option value=""></option>
                                 @foreach ($data_region as $row)
-                                    <option value="{{ $row->region }}">{{ $row->region }}</option>
+                                    <option value="{{ $row->region }}" {{ old('region') == $row->region ? 'selected' : '' }}>{{ $row->region }}</option>
                                 @endforeach
                             </select>
                             @error('region')
@@ -52,10 +56,10 @@
                         </div>
                         <div class="col-4 mt-3">
                             <h6>Witel</h6>
-                            <select name="witel" class="form-select form-select-sm @error('witel') is-invalid @enderror">
-                                <option value="">Pilih witel</option>
+                            <select name="witel" id="select-witel">
+                                <option value=""></option>
                                 @foreach ($data_witel as $row)
-                                    <option value="{{ $row->witel }}">{{ $row->witel }}</option>
+                                    <option value="{{ $row->witel }}" {{ old('witel') == $row->witel ? 'selected' : '' }}>{{ $row->witel }}</option>
                                 @endforeach
                             </select>
                             @error('witel')
@@ -64,22 +68,22 @@
                         </div>
                         <div class="col-3 mt-3">
                             <h6>Tgl mulai pelaksanaan</h6>
-                            <input name="tgl_mulai_pelaksanaan" type="date" class="form-control form-control-sm @error('tgl_mulai_pelaksanaan') is-invalid @enderror">
+                            <input name="tgl_mulai_pelaksanaan" type="date" class="form-control @error('tgl_mulai_pelaksanaan') is-invalid @enderror">
                             @error('tgl_mulai_pelaksanaan')
                                 <p class="text-danger mb-0">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-3 mt-3">
                             <h6>Tgl selesai pelaksanaan</h6>
-                            <input name="tgl_selesai_pelaksanaan" type="date" class="form-control form-control-sm @error('tgl_selesai_pelaksanaan') is-invalid @enderror">
+                            <input name="tgl_selesai_pelaksanaan" type="date" class="form-control @error('tgl_selesai_pelaksanaan') is-invalid @enderror">
                             @error('tgl_selesai_pelaksanaan')
                                 <p class="text-danger mb-0">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="col-3 mt-3">
                             <h6>Bulan Pelaksanaan</h6>
-                            <select name="bulan" class="form-select form-select-sm @error('bulan') is-invalid @enderror" aria-label=".form-select-sm example"  name="" id="">
-                                <option value="">Pilih bulan</option>
+                            <select name="bulan" class="form-select @error('bulan') is-invalid @enderror"  name="" id="">
+                                <option value=""></option>
                                 <option value="1">Januari</option>
                                 <option value="2">Februari</option>
                                 <option value="3">Maret</option>
@@ -99,7 +103,7 @@
                         </div>
                         <div class="col-3 mt-3">
                             <h6>Tahun Pelaksanaan</h6>
-                            <input name="tahun" type="number" class="form-control form-control-sm @error('tahun') is-invalid @enderror" min="2000" max="2200">
+                            <input name="tahun" type="number" class="form-control @error('tahun') is-invalid @enderror" min="2000" max="2200">
                             @error('tahun')
                                 <p class="text-danger mb-0">{{ $message }}</p>
                             @enderror
@@ -107,7 +111,7 @@
                     </div>
                                     
                     <h6 class="mt-3">Upload .csv</h6>
-                    <input type="file" name="csv" class="form-control form-control-sm w-75 @error('csv') is-invalid @enderror">
+                    <input type="file" name="csv" class="form-control w-75 @error('csv') is-invalid @enderror" style="background-color: #fff;">
                     @error('csv')
                         <p class="text-danger mb-0">{{ $message }}</p>
                     @enderror
@@ -172,6 +176,35 @@
             "dom": '<"row"<"col"Blr><"col"f>><"row mt-3 mb-2"<"col"t>>ip',
             "order": [],
             "columnDefs": [{ "orderable": false, "targets": 'no-sort' }]
+    });
+
+    new TomSelect("#select-pelatihan",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
+    new TomSelect("#select-region",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
+    new TomSelect("#select-witel",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
+    new TomSelect("#select-bulan",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
     });
 </script>
 

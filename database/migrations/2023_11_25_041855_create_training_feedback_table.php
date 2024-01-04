@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('tgl_akhir_training')->nullable();
             $table->string('regional_penyelenggara')->nullable();
             $table->string('witel_penyelenggara')->nullable();
+            $table->string('feedback_rencana')->nullable();
             $table->string('feedback_saran')->nullable();
             $table->float('feedback_support_1')->nullable();
             $table->float('feedback_support_2')->nullable();

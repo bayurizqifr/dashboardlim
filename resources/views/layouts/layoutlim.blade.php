@@ -41,6 +41,11 @@
     {{-- dataTables SCRIPT--}}
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    {{-- tomSelect --}}
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    {{-- tomSelect Script--}}
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 </head>
 
 <body>
@@ -64,6 +69,7 @@
                 <a href="home" class="nav-item nav-link {{ Request::is('home') ? 'active' : ''}}">Home</a>
                 <a href="lim1" class="nav-item nav-link {{ Request::is('lim1') ? 'active' : ''}}">Lim 1</a>
                 <a href="lim2" class="nav-item nav-link {{ Request::is('lim2') ? 'active' : ''}}">Lim 2</a>
+                <a href="form-feedback" class="nav-item nav-link {{ Request::is('form-feedback') ? 'active' : ''}}">From Feedback</a>
                 <a href="/upload" class="nav-item nav-link {{ Request::is('upload') ? 'active' : ''}}">Upload</a>
                 @if (session('user_admin'))
                     <div class="nav-item nav-link text-dark px-0 mx-2"> | </div>

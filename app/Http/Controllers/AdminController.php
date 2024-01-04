@@ -119,6 +119,39 @@ class AdminController extends Controller
         return view('admin.add-pelatihan', $data);
     }
 
+    public function add_pelatihan_csv_upload(Request $request){        
+        $rawdata = [];
+        if($request->csv->extension() !== 'txt'){
+            session()->flash('csv-gagal', 'File CSV tidak dapat dibaca');
+            return redirect('/admin/add-pelatihan');
+        }else{
+            $data = $request->csv->path();
+            $file = fopen($data,"r");
+
+            echo '<pre>';
+            while(! feof($file)){
+                $open = fgetcsv($file);
+                if($open !== false){
+                    array_push($rawdata, $open);
+                }
+            }
+
+            fclose($file);
+        }
+
+        unset($rawdata[0]);
+
+        foreach($rawdata as $rd){
+            $open = explode(';',$rd[0]);
+            if(isset($open[1])){
+                DB::statement('INSERT INTO `nama_pelatihans` (`nama_pelatihan`, `id_nama_pelatihan`, `type_pelatihan`, `type_id_pelatihan`) VALUES ("'.$open[0].'","'.$open[1].'","'.$open[2].'","'.$open[3].'")');
+            }
+        }        
+
+        session()->flash('status-sukses', 'data berhasil ditambahkan');
+        return redirect('/admin/add-pelatihan');
+    }
+
     public function add_region(){
         $region = DB::table('regions')->get();
         $data = [

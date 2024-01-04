@@ -99,7 +99,7 @@
                         <td class="text-center">-</td>
                     </tr>
                 </tbody>
-              </table>
+            </table>
          </div>
      </div>
 </div>
@@ -143,7 +143,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'Chart.js Doughnut Chart'
+                    text: 'PEOPLE PERFORMANCE POTINTIAL'
                 }
             }
         },
@@ -195,7 +195,7 @@
     var trace1 = {
       y: [1, 2, 2, 3, 3, 3, 4, 4, 5],
       type: 'box',
-      name: 'Boxplot 1',
+      name: 'Pre-Test',
       marker: {
         color: 'grey' // Set the color of the box to grey
       }
@@ -204,20 +204,20 @@
     var trace2 = {
       y: [2, 3, 3, 4, 4, 4, 5, 5, 6],
       type: 'box',
-      name: 'Boxplot 2',
+      name: 'Post-Test',
       marker: {
         color: 'lightgrey' // Set the color of the second box to light grey
       }
     };
 
     var layout = {
-      title: 'Two Boxplots Example',
-      boxmode: 'group' // Set the box mode to 'group' for side-by-side boxplots
+      title: 'BOXPLOT PATH PRE-POST TEST',
+    //   boxmode: 'group' // Set the box mode to 'group' for side-by-side boxplots
     };
 
     var data = [trace1, trace2];
 
-    Plotly.newPlot('boxplot', data, layout);
+    Plotly.newPlot('boxplot', data, layout, {staticPlot: true});
   });
 </script>
 

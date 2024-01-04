@@ -10,7 +10,7 @@ class UserAdminController extends Controller
 {
     public function upload()
     {
-        $data_upload = DB::table('training_evaluations')->where('username_uploader', session('user_admin_username'))->distinct('bulan_pelaksanaan', 'tahun_pelaksanaan')->get();
+        $data_upload = DB::table('training_evaluations')->where('username_uploader', session('user_admin_username'))->groupBy('bulan_pelaksanaan', 'tahun_pelaksanaan')->get();
         $data_nama_pelatihan = DB::table('nama_pelatihans')->get();
         $data_region = DB::table('regions')->get();
         $data_witel = DB::table('witels')->get();
