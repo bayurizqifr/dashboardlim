@@ -1,16 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\WitelController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\NamaPelatihanController;
-use App\Http\Controllers\TrainingEvaluationController;
 use App\Http\Controllers\TrainingFeedbackController;
-use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\UserMiddleware;
+use App\Http\Controllers\TrainingEvaluationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +34,14 @@ Route::get('/home', function () {
 });
 
 //========================================LIM2
-Route::get('/lim2', function () {
-    return view('pages.lim2');
-});
+Route::get('/lim2', [UserPageController::class, 'lim2']);
 
 //========================================LIM1
 Route::get('/lim1', [TrainingFeedbackController::class, 'show_lim1']);
+
+//========================================FORM FEEDBACK
+Route::get('/form-feedback', [UserPageController::class, 'form_feedback_page']);
+Route::post('/form-feedback-upload', [UserPageController::class, 'form_feedback_upload']);
 
 // ============================================================ USERADMIN
 Route::post('/login', [UserAdminController::class, 'login_useradmin_cek']);
@@ -77,6 +80,7 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/admin/add-user', [AdminController::class, 'add_user']);
     Route::resource('/admin/add-user', UserController::class)->except(['index']);
     Route::get('/admin/add-pelatihan', [AdminController::class, 'add_pelatihan']);
+    Route::post('/admin/add-pelatihan-csv-upload', [AdminController::class, 'add_pelatihan_csv_upload']);
     Route::resource('/admin/add-pelatihan', NamaPelatihanController::class)->except(['index']);
     Route::get('/admin/add-region', [AdminController::class, 'add_region']);
     Route::resource('/admin/add-region', RegionController::class)->except(['index']);

@@ -10,6 +10,15 @@
     </div>
 @endif
 
+@if (session('csv-gagal'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {!! session('csv-gagal') !!}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 @if ($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         Gagal menyimpan data. Isikan data dengan benar
@@ -18,7 +27,11 @@
         </button>
     </div>
 @endif
-
+<style>
+    .ts-control{
+        border: 1px solid #282f3a;
+    }
+</style>
 <div class="row">
     <div class="col">
         <div class="card">
@@ -49,7 +62,7 @@
                                     <div class="row">
                                         <div class="col-4 mt-3">
                                             <h6>Nama Pelatihan</h6>
-                                            <select name="nama_pelatihan" class="form-control form-control-sm text-dark @if($errors->has('nama_pelatihan')) is-invalid @else border-dark @endif">
+                                            <select name="nama_pelatihan" id="select-pelatihan" >
                                                 <option value="">Pilih pelatihan</option>
                                                 @foreach ($data_nama_pelatihan as $row)
                                                     <option value="{{ $row->nama_pelatihan }}">{{ $row->nama_pelatihan }}</option>
@@ -61,7 +74,7 @@
                                         </div>
                                         <div class="col-4 mt-3">
                                             <h6>Region</h6>
-                                            <select name="region" class="form-control form-control-sm text-dark @if($errors->has('region')) is-invalid @else border-dark @endif">
+                                            <select name="region" id="select-region">
                                                 <option value="">Pilih region</option>
                                                 @foreach ($data_region as $row)
                                                     <option value="{{ $row->region }}">{{ $row->region }}</option>
@@ -73,7 +86,7 @@
                                         </div>
                                         <div class="col-4 mt-3">
                                             <h6>Witel</h6>
-                                            <select name="witel" class="form-control form-control-sm text-dark @if($errors->has('witel')) is-invalid @else border-dark @endif">
+                                            <select name="witel" id="select-witel">
                                                 <option value="">Pilih witel</option>
                                                 @foreach ($data_witel as $row)
                                                     <option value="{{ $row->witel }}">{{ $row->witel }}</option>
@@ -99,7 +112,7 @@
                                         </div>
                                         <div class="col-3 mt-3">
                                             <h6>Bulan Pelaksanaan</h6>
-                                            <select name="bulan" class="form-control form-control-sm text-dark @if($errors->has('bulan')) is-invalid @else border-dark @endif" aria-label=".form-control-sm text-dark example"  name="" id="">
+                                            <select name="bulan" class="form-control form-control-sm text-dark @if($errors->has('bulan')) is-invalid @else border-dark @endif" aria-label=".form-control-sm text-dark example" >
                                                 <option value="">Pilih bulan</option>
                                                 <option value="1">Januari</option>
                                                 <option value="2">Februari</option>
@@ -128,7 +141,7 @@
                                     </div>
                                     <br>
                                     <h6>Input CSV file</h6>
-                                    <input type="file" name="csv" class="form-control form-control-sm text-dark border-dark">
+                                    <input type="file" name="csv" class="form-control form-control-sm text-dark border-dark" required>
                                     <br>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -199,9 +212,11 @@
                                 <th style="width: 200px">Feedback Support (1-5)</th>
                                 <th style="width: 200px">Feedback Facilitator (1-5)</th>
                                 <th style="width: 200px">Feedback Facilities (1-5)</th>
+                                <th style="width: 400px">Feedback Rencana</th>
                                 <th style="width: 400px">Feedback Saran</th>
                                 <th style="width: 200px">Feedback Manfaat (1-5)</th>
                                 <th style="width: 200px">Feedback Antusias (1-10)</th>                                
+                                <th>Opsi</th>                                
                             </tr>
                         </thead>
                         <tbody class="table table-sm">
@@ -221,9 +236,39 @@
                                     <td class="text-center">{{ round(($row->feedback_support_1 + $row->feedback_support_2 + $row->feedback_support_3) / 3 , 2)}}</td>
                                     <td class="text-center">{{ round(($row->feedback_facilitator_1 + $row->feedback_facilitator_2 + $row->feedback_facilitator_3) / 3 , 2)}}</td>
                                     <td class="text-center">{{ round(($row->feedback_facilities_1 + $row->feedback_facilities_2 + $row->feedback_facilities_3) / 3 , 2)}}</td>
+                                    <td class="text-center">{{ $row->feedback_rencana }}</td>
                                     <td class="text-center">{{ $row->feedback_saran }}</td>
                                     <td class="text-center">{{ $row->feedback_manfaat }}</td>
                                     <td class="text-center">{{ $row->feedback_antusias }}</td>
+                                    <td class="text-center">
+                                        {{-- Hapus --}}
+                                        <button type="button" class="btn btn-danger py-2" data-toggle="modal" data-target="#delete{{ $no }}">
+                                            <i class="mdi mdi-delete" style="font-size: 16px"></i> Hapus
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="delete{{ $no }}" tabindex="-1" role="dialog" aria-labelledby="delete{{ $no }}Title" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    <p class="mb-4 d-block">Apakah anda yakin ingin menghapus data <br> <b>{{ $row->nama_lengkap }}</b> <br> dengan NIK <b>{{ $row->nik }}</b></p>
+                                                    <form action="/admin/lim-1/{{ $row->id }}" method="post" class="d-inline">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <input type="hidden" name="b" value="{{ $row->bulan_pelaksanaan }}">
+                                                        <input type="hidden" name="t" value="{{ $row->tahun_pelaksanaan }}">
+                                                        <button type="submit" class="btn btn-danger py-2"><i class="mdi mdi-delete" style="font-size: 16px"></i> Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -240,6 +285,28 @@
             "scrollX": true,
             "order": [],
             "columnDefs": [{ "orderable": false, "targets": 'no-sort' }]
+    });
+
+    new TomSelect("#select-pelatihan",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
+    new TomSelect("#select-region",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });
+    new TomSelect("#select-witel",{
+        create: false,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
     });
 </script>
 @endsection

@@ -48,7 +48,7 @@ class TrainingFeedbackController extends Controller
         $rawdata = [];
         if($request->csv->extension() !== 'txt'){
             session()->flash('csv-gagal', 'File CSV tidak dapat dibaca');
-            return 'tidak masuk pak haji';
+            return redirect('/admin/lim-1');
         }else{
             $data = $request->csv->path();
             $file = fopen($data,"r");
@@ -58,7 +58,7 @@ class TrainingFeedbackController extends Controller
 
                 if($open !== false){
                     $open = explode(';',$open[0]);
-                    array_push($rawdata, [$request->bulan, $request->tahun, $open[0], $open[1], $open[2], $request->nama_pelatihan, $request->tgl_mulai_training, $request->tgl_akhir_training, $request->region, $request->witel, $open[3], $open[4], $open[5], $open[6], $open[7], $open[8], $open[9], $open[10], $open[11], $open[12], $open[13], $open[14]]);
+                    array_push($rawdata, [$request->bulan, $request->tahun, $open[0], $open[1], $open[2], $request->nama_pelatihan, $request->tgl_mulai_training, $request->tgl_akhir_training, $request->region, $request->witel, $open[3], $open[4], $open[5], $open[6], $open[7], $open[8], $open[9], $open[10], $open[11], $open[12], $open[13], $open[14], $open[15]]);
                 }
             }
 
@@ -81,23 +81,24 @@ class TrainingFeedbackController extends Controller
                 'tgl_akhir_training' => $rd[7],
                 'regional_penyelenggara' => $rd[8],
                 'witel_penyelenggara' => $rd[9],
-                'feedback_saran' => $rd[10],
-                'feedback_support_1' => $rd[11],
-                'feedback_support_2' => $rd[12],
-                'feedback_support_3' => $rd[13],
-                'feedback_facilitator_1' => $rd[14],
-                'feedback_facilitator_2' => $rd[15],
-                'feedback_facilitator_3' => $rd[16],
-                'feedback_facilities_1' => $rd[17],
-                'feedback_facilities_2' => $rd[18],
-                'feedback_facilities_3' => $rd[19],
-                'feedback_manfaat' => $rd[20],
-                'feedback_antusias' => $rd[21],
+                'feedback_rencana' => $rd[10],
+                'feedback_saran' => $rd[11],
+                'feedback_support_1' => $rd[12],
+                'feedback_support_2' => $rd[13],
+                'feedback_support_3' => $rd[14],
+                'feedback_facilitator_1' => $rd[15],
+                'feedback_facilitator_2' => $rd[16],
+                'feedback_facilitator_3' => $rd[17],
+                'feedback_facilities_1' => $rd[18],
+                'feedback_facilities_2' => $rd[19],
+                'feedback_facilities_3' => $rd[20],
+                'feedback_manfaat' => $rd[21],
+                'feedback_antusias' => $rd[22],
             ]);
         }        
 
         session()->flash('status-sukses', 'data berhasil ditambahkan');
-        return redirect('/admin/lim-1');
+        return redirect('/admin/lim-1');     
     }
 
     /**
@@ -165,8 +166,12 @@ class TrainingFeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TrainingFeedback $trainingFeedback)
+    public function destroy($id,Request $request, TrainingFeedback $trainingFeedback)
     {
-        //
+        // echo'<pre>';var_dump($id);die;
+        DB::table('training_feedback')->where([['id', $id]])->delete();
+
+        session()->flash('status-sukses', 'data berhasil dihapus');
+        return redirect('/admin/lim-1?b='.$request->b.'&t='.$request->t);
     }
 }

@@ -32,12 +32,19 @@ class NamaPelatihanController extends Controller
     {
         $request->validate([
             'nama_pelatihan' => 'required',
+            'id_nama_pelatihan' => 'required|unique:nama_pelatihans,id_nama_pelatihan',
+            'type_pelatihan' => 'required',
+            'type_id_pelatihan' => 'required',
         ],[
             'required' => 'Field :attribute tidak boleh kosong',
+            'unique' => 'Tidak dapat menggunakan value yang sudah tersimpan di database',
         ]); 
 
         NamaPelatihan::create([
             'nama_pelatihan' => $request->nama_pelatihan,
+            'id_nama_pelatihan' => $request->id_nama_pelatihan,
+            'type_pelatihan' => $request->type_pelatihan,
+            'type_id_pelatihan' => $request->type_id_pelatihan,
         ]);
 
         session()->flash('status-sukses', 'data berhasil ditambahkan');
