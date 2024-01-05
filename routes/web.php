@@ -33,11 +33,11 @@ Route::get('/home', function () {
     return view('pages.home');
 });
 
+//========================================LIM1
+Route::get('/lim1', [UserPageController::class, 'lim1']);
 //========================================LIM2
 Route::get('/lim2', [UserPageController::class, 'lim2']);
 
-//========================================LIM1
-Route::get('/lim1', [TrainingFeedbackController::class, 'show_lim1']);
 
 //========================================FORM FEEDBACK
 Route::get('/form-feedback', [UserPageController::class, 'form_feedback_page']);
@@ -54,8 +54,6 @@ Route::middleware(UserMiddleware::class)->group(function () {
     Route::get('/upload-detail', [UserAdminController::class, 'upload_detail']);
     Route::resource('/upload', TrainingEvaluationController::class)->except(['index']);
 });
-
-
 
 
 

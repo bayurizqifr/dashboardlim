@@ -72,7 +72,7 @@ class AdminController extends Controller
 
     public function lim_2(Request $request){
         if($request->b && $request->t){
-            $trainingEvaluations = DB::table('training_evaluations')->where([['bulan_pelaksanaan',$request->b], ['tahun_pelaksanaan',$request->t]])->distinct('bulan_pelaksanaan', 'tahun_pelaksanaan')->get();
+            $trainingEvaluations = DB::table('training_evaluations')->where([['bulan_pelaksanaan',$request->b], ['tahun_pelaksanaan',$request->t]])->groupBy('bulan_pelaksanaan', 'tahun_pelaksanaan', 'username_uploader', 'nama_pelatihan')->get();
         }else{
             $trainingEvaluations = [];
         }
@@ -86,8 +86,10 @@ class AdminController extends Controller
     }
     
     public function lim_2_detail(Request $request){
-        $data_upload = DB::table('training_evaluations')->where([['username_uploader', $request->username],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t]])->get();
-        $data_detail = DB::table('training_evaluations')->where([['username_uploader', $request->username],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t]])->first();
+        $data_upload = DB::table('training_evaluations')->where([['username_uploader', $request->username],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t],['nama_pelatihan', $request->nama_pelatihan]])->get();
+        $data_detail = DB::table('training_evaluations')->where([['username_uploader', $request->username],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t],['nama_pelatihan', $request->nama_pelatihan]])->first();
+
+        // var_dump($data_upload);die;
 
         $data = [
             'data_detail' => $data_detail,
@@ -97,10 +99,10 @@ class AdminController extends Controller
     }
     
     public function lim_2_delete(Request $request){
-        DB::table('training_evaluations')->where([['username_uploader', $request->username],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t]])->delete();
+        DB::table('training_evaluations')->where([['username_uploader', $request->username],['bulan_pelaksanaan', $request->b],['tahun_pelaksanaan', $request->t],['nama_pelatihan', $request->nama_pelatihan]])->delete();
 
         session()->flash('status-sukses', 'data berhasil dihapus');
-        return redirect('/admin/lim-2');
+        return redirect('/admin/lim-2?b='.$request->b.'&t='.$request->t);
     }
 
     public function add_user(){

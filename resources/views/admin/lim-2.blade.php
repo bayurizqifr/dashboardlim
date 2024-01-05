@@ -93,6 +93,7 @@
                                         <input type="hidden" name="b" value="{{ $row->bulan_pelaksanaan }}">
                                         <input type="hidden" name="t" value="{{ $row->tahun_pelaksanaan }}">
                                         <input type="hidden" name="username" value="{{ $row->username_uploader }}">
+                                        <input type="hidden" name="nama_pelatihan" value="{{ $row->nama_pelatihan }}">
                                         <button class="btn btn-success py-2"><i class="mdi mdi-magnify" style="font-size: 16px"></i> Lihat Detail</button>
                                     </form>
 
@@ -117,6 +118,7 @@
                                                     <input type="hidden" name="b" value="{{ $row->bulan_pelaksanaan }}">
                                                     <input type="hidden" name="t" value="{{ $row->tahun_pelaksanaan }}">
                                                     <input type="hidden" name="username" value="{{ $row->username_uploader }}">
+                                                    <input type="hidden" name="nama_pelatihan" value="{{ $row->nama_pelatihan }}">
                                                     <button type="submit" class="btn btn-danger py-2"><i class="mdi mdi-delete" style="font-size: 16px"></i> Hapus</button>
                                                 </form>
                                             </div>

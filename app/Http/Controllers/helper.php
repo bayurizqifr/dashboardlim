@@ -103,4 +103,16 @@ class helper extends Controller
         $return = DB::table('users')->where('username', $username)->first();
         return $return->name;
     }
+
+    public function lim_2_table($region, $keterangan = 0){
+        $data_bulan_tahun = DB::table('show_bulans')->where('id', 1)->first();
+        // var_dump($data_bulan_tahun->bulan_pelaksanaan);die;
+        if ($keterangan !== 0) {
+            $hasil = DB::table('training_evaluations')->where([['bulan_pelaksanaan', $data_bulan_tahun->bulan_pelaksanaan],['tahun_pelaksanaan', $data_bulan_tahun->tahun_pelaksanaan],['regional', $region],['keterangan', $keterangan]])->count();
+            return $hasil;
+        }elseif ($keterangan == 0){
+            $hasil = DB::table('training_evaluations')->where([['bulan_pelaksanaan', $data_bulan_tahun->bulan_pelaksanaan],['tahun_pelaksanaan', $data_bulan_tahun->tahun_pelaksanaan],['regional', $region]])->count();
+            return $hasil;
+        }
+    }
 }

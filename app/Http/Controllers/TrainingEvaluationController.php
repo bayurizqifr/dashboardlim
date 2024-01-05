@@ -68,7 +68,10 @@ class TrainingEvaluationController extends Controller
         
         unset($rawdata[0]);
 
-        DB::table('training_evaluations')->where([['bulan_pelaksanaan', $request->bulan], ['tahun_pelaksanaan', $request->tahun]])->delete();
+        $get_data = DB::table('training_evaluations')->where([['bulan_pelaksanaan', $request->bulan], ['tahun_pelaksanaan', $request->tahun], ['nama_pelatihan', $request->nama_pelatihan], ['username_uploader', session('user_admin_username')]])->count();
+        if ($get_data > 0) {
+            DB::table('training_evaluations')->where([['bulan_pelaksanaan', $request->bulan], ['tahun_pelaksanaan', $request->tahun], ['nama_pelatihan', $request->nama_pelatihan], ['username_uploader', session('user_admin_username')]])->delete();
+        }
 
         foreach($rawdata as $rd){
             TrainingEvaluation::create([
@@ -86,7 +89,7 @@ class TrainingEvaluationController extends Controller
                 'kehadiran' => $rd[10],
                 'nilai_pre_test' => (float)$rd[11],
                 'nilai_post_test' => (float)$rd[12],
-                'keterangan' => (new helper)->training_evaluation_keterangan($rd[12], $rd[11]),
+                'keterangan' => (new helper)->training_evaluation_keterangan($rd[11], $rd[12]),
                 'peningkatan_belajar' => ((int)$rd[12] - (int)$rd[11]) / (int)$rd[11] * 100,
             ]);
         }        
