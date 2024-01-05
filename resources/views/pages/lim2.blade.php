@@ -1,3 +1,5 @@
+@inject('helper', 'App\Http\Controllers\helper')
+
 @extends('layouts.layoutlim')
 @section('content')
 
@@ -19,7 +21,7 @@
 
     <div class="row mb-5">
         <div class="col-6">
-           <canvas id="scatterChart" class="mx-auto w-50"></canvas>
+           <canvas id="scatterChart" class="mx-auto w-100"></canvas>
         </div>
         <div class="col-6">
             <table class="table table-sm table-bordered" id="">
@@ -35,68 +37,28 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        
+                    @endphp
+                    @foreach ($regional as $row)
+                        <tr>
+                            <td class="text-center">{{ $row->region }}</td>
+                            <td class="text-center">{{ $helper->lim_2_table($row->region, 'consistence star') == 0 ? '-' : $helper->lim_2_table($row->region, 'consistence star') }}</td>
+                            <td class="text-center">{{ $helper->lim_2_table($row->region, 'continuity learner') == 0 ? '-' : $helper->lim_2_table($row->region, 'continuity learner') }}</td>
+                            <td class="text-center">{{ $helper->lim_2_table($row->region, 'high profesional learner') == 0 ? '-' : $helper->lim_2_table($row->region, 'high profesional learner') }}</td>
+                            <td class="text-center">{{ $helper->lim_2_table($row->region, 'inconsistent') == 0 ? '-' : $helper->lim_2_table($row->region, 'inconsistent') }}</td>
+                            <td class="text-center">{{ $helper->lim_2_table($row->region, 'deadwood') == 0 ? '-' : $helper->lim_2_table($row->region, 'deadwood') }}</td>
+                            <td class="text-center">{{ $helper->lim_2_table($row->region) == 0 ? '-' : $helper->lim_2_table($row->region) }}</td>
+                        </tr>
+                    @endforeach
                     <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">2</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">3</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">4</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">5</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">6</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">7</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
+                        <td class="text-center text-dark" style="font-size: 12px"><b>Grand Total</b></td>
+                        <td class="text-center text-dark"><b>{{ $count_cs }}</b></td>
+                        <td class="text-center text-dark"><b>{{ $count_cl }}</b></td>
+                        <td class="text-center text-dark"><b>{{ $count_hpl }}</b></td>
+                        <td class="text-center text-dark"><b>{{ $count_i }}</b></td>
+                        <td class="text-center text-dark"><b>{{ $count_d }}</b></td>
+                        <td class="text-center text-dark"><b>{{ $count_cs + $count_cl + $count_hpl + $count_i + $count_d }}</b></td>
                     </tr>
                 </tbody>
             </table>
@@ -123,8 +85,8 @@
                 'Deadwood',
             ],
             datasets: [{
-                label: 'My First Dataset',
-                data: [478, 156, 2212, 0, 0],
+                // label: 'My First Dataset',
+                data: [{{ $count_cs }}, {{ $count_cl }}, {{ $count_hpl }}, {{ $count_i }}, {{ $count_d }}],
                 backgroundColor: [
                     '#265073',
                     'E48F45',
@@ -143,7 +105,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'PEOPLE PERFORMANCE POTINTIAL'
+                    text: 'PEOPLE PERFORMANCE POTENTIAL'
                 }
             }
         },
@@ -159,32 +121,52 @@
        new Chart(ctx, {
           type: 'scatter',
           data: {
-             datasets: [{
-                label: 'Scatter Dataset',
-                data: [{
-                   x: -10,
-                   y: 0
-                }, {
-                   x: 0,
-                   y: 10
-                }, {
-                   x: 10,
-                   y: 5
-                }, {
-                   x: 0.5,
-                   y: 5.5
-                }],
+             datasets: [
+            {
+                label: 'Consistence Star',
+                data: [{{ $scatter_cs }}],
                 backgroundColor: 'rgb(255, 99, 132)'
-             }],
+            },
+            {
+                label: 'Continuity Learner',
+                data: [{{ $scatter_cl }}],
+                backgroundColor: 'rgb(0, 99, 132)'
+            },
+            {
+                label: 'High Profesional Learner',
+                data: [{{ $scatter_hpl }}],
+                backgroundColor: 'rgb(0, 99, 132)'
+            },
+            {
+                label: 'Inconsistent',
+                data: [{{ $scatter_i }}],
+                backgroundColor: 'rgb(0, 99, 132)'
+            },
+            {
+                label: 'Deadwood',
+                data: [{{ $scatter_d }}],
+                backgroundColor: 'rgb(0, 99, 132)'
+            },
+            ],
           },
           options: {
-             scales: {
-                x: {
-                   type: 'linear',
-                   position: 'bottom'
+            responsive: true,
+            layout: {
+                padding: {
+                    // left : 20,
+                    right : 40
                 }
-             }
-          },
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'SCATTER AND TREEMAP MARKS PRE-POST TEST'
+                },
+            }
+        },
        });
     });
  </script> 
@@ -193,7 +175,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var trace1 = {
-      y: [1, 2, 2, 3, 3, 3, 4, 4, 5],
+      y: [{{ $boxplot_pre_test }}],
       type: 'box',
       name: 'Pre-Test',
       marker: {
@@ -202,7 +184,7 @@
     };
 
     var trace2 = {
-      y: [2, 3, 3, 4, 4, 4, 5, 5, 6],
+      y: [{{ $boxplot_post_test }}],
       type: 'box',
       name: 'Post-Test',
       marker: {

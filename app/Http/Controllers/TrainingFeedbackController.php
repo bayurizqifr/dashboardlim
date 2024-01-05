@@ -67,7 +67,7 @@ class TrainingFeedbackController extends Controller
 
         unset($rawdata[0]);
 
-        DB::table('training_feedback')->where([['bulan_pelaksanaan', $request->bulan], ['tahun_pelaksanaan', $request->tahun]])->delete();
+        // DB::table('training_feedback')->where([['bulan_pelaksanaan', $request->bulan], ['tahun_pelaksanaan', $request->tahun]])->delete();
 
         foreach($rawdata as $rd){
             TrainingFeedback::create([
@@ -142,6 +142,7 @@ class TrainingFeedbackController extends Controller
            return view('pages.lim1', $data);
     }
 
+    
     public function show(TrainingFeedback $trainingFeedback)
     {
         //
