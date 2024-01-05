@@ -69,7 +69,7 @@
                 <a href="home" class="nav-item nav-link {{ Request::is('home') ? 'active' : ''}}">Home</a>
                 <a href="lim1" class="nav-item nav-link {{ Request::is('lim1') ? 'active' : ''}}">Lim 1</a>
                 <a href="lim2" class="nav-item nav-link {{ Request::is('lim2') ? 'active' : ''}}">Lim 2</a>
-                <a href="form-feedback" class="nav-item nav-link {{ Request::is('form-feedback') ? 'active' : ''}}">From Feedback</a>
+                <a href="form-feedback" class="nav-item nav-link {{ Request::is('form-feedback') ? 'active' : ''}}">Form Feedback</a>
                 <a href="/upload" class="nav-item nav-link {{ Request::is('upload') ? 'active' : ''}}">Upload</a>
                 @if (session('user_admin'))
                     <div class="nav-item nav-link text-dark px-0 mx-2"> | </div>
