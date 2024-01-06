@@ -197,6 +197,7 @@
                   <li class="nav-item"> <a class="nav-link" href="/admin/add-pelatihan">Add Pelatihan</a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/add-region">Add Region</a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/add-witel">Add Witel</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/edit-showing">Show Setting</a></li>
                 @endif
               </ul>
             </div>

@@ -170,4 +170,18 @@ class AdminController extends Controller
         return view('admin.add-witel', $data);
     }
 
+    public function edit_showing(){
+        $show = DB::table('show_bulans')->where('id', 1)->first();
+        $data = [
+            'show' => $show
+        ];
+        return view('admin.edit-showing', $data);
+    }
+
+    public function edit_showing_edit(Request $request){
+        DB::table('show_bulans')->where('id', 1)->update(['bulan_pelaksanaan' => $request->bulan, 'tahun_pelaksanaan' => $request->tahun]);
+        session()->flash('status-sukses', 'data berhasil diubah');
+        return redirect('/admin/edit-showing');
+    }
+
 }

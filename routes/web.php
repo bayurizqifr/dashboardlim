@@ -84,4 +84,6 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::resource('/admin/add-region', RegionController::class)->except(['index']);
     Route::get('/admin/add-witel', [AdminController::class, 'add_witel']);
     Route::resource('/admin/add-witel', WitelController::class)->except(['index']);
+    Route::get('/admin/edit-showing', [AdminController::class, 'edit_showing']);
+    Route::post('/admin/edit-showing-edit', [AdminController::class, 'edit_showing_edit']);
 });
