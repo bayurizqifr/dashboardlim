@@ -52,7 +52,7 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
-        <a href="index.html" class="navbar-brand ps-5 me-0">
+        <a href="#" class="navbar-brand ps-5 me-0">
             <h1 class="text-white m-0">Fiber Academy</h1>
         </a>
         <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -63,7 +63,7 @@
                 <a href="home" class="nav-item nav-link active">Home</a>
                 <a href="lim1" class="nav-item nav-link">Lim 1</a>
                 <a href="lim2" class="nav-item nav-link">Lim 2</a>
-                <a href="form-feedback" class="nav-item nav-link">From Feedback</a>
+                <a href="form-feedback" class="nav-item nav-link">Form Feedback</a>
                 <a href="/upload" class="nav-item nav-link">Upload</a>
                 @if (session('user_admin'))
                     <div class="nav-item nav-link text-dark px-0 mx-2"> | </div>
