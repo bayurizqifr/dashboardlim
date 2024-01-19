@@ -88,11 +88,11 @@
                 // label: 'My First Dataset',
                 data: [{{ $count_cs }}, {{ $count_cl }}, {{ $count_hpl }}, {{ $count_i }}, {{ $count_d }}],
                 backgroundColor: [
-                    '#265073',
-                    'E48F45',
-                    '#B0A695',
-                    '#FFC436',
-                    '#83A2FF'
+                    '#20B2AA',
+                    '#FFA07A',
+                    '#A0522D',
+                    '#FF69B4',
+                    '#7B68EE'
                 ],
                 hoverOffset: 4
             }]
@@ -125,27 +125,27 @@
             {
                 label: 'Consistence Star',
                 data: [{{ $scatter_cs }}],
-                backgroundColor: 'rgb(255, 99, 132)'
+                backgroundColor: '#20B2AA'
             },
             {
                 label: 'Continuity Learner',
                 data: [{{ $scatter_cl }}],
-                backgroundColor: 'rgb(0, 99, 132)'
+                backgroundColor: '#FFA07A'
             },
             {
                 label: 'High Profesional Learner',
                 data: [{{ $scatter_hpl }}],
-                backgroundColor: 'rgb(0, 99, 132)'
+                backgroundColor: '#A0522D'
             },
             {
                 label: 'Inconsistent',
                 data: [{{ $scatter_i }}],
-                backgroundColor: 'rgb(0, 99, 132)'
+                backgroundColor: '#FF69B4'
             },
             {
                 label: 'Deadwood',
                 data: [{{ $scatter_d }}],
-                backgroundColor: 'rgb(0, 99, 132)'
+                backgroundColor: '#7B68EE'
             },
             ],
           },
@@ -179,7 +179,7 @@
       type: 'box',
       name: 'Pre-Test',
       marker: {
-        color: 'grey' // Set the color of the box to grey
+        color: '#FF0000' // Set the color of the box to grey
       }
     };
 
@@ -188,7 +188,7 @@
       type: 'box',
       name: 'Post-Test',
       marker: {
-        color: 'lightgrey' // Set the color of the second box to light grey
+        color: '#0000CD' // Set the color of the second box to light grey
       }
     };
 
