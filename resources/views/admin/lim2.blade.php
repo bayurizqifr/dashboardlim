@@ -1,6 +1,6 @@
 @inject('helper', 'App\Http\Controllers\helper')
 
-@extends('layouts.layoutlim')
+@extends('layout.adminlayoutlim')
 @section('content')
 
 <div class="row">
@@ -88,11 +88,11 @@
                 // label: 'My First Dataset',
                 data: [{{ $count_cs }}, {{ $count_cl }}, {{ $count_hpl }}, {{ $count_i }}, {{ $count_d }}],
                 backgroundColor: [
-                    '#20B2AA',
-                    '#FFA07A',
-                    '#A0522D',
-                    '#FF69B4',
-                    '#7B68EE'
+                    '#6EB257',
+                    '#488B49',
+                    '#507255',
+                    '#283618',
+                    '#606C38'
                 ],
                 hoverOffset: 4
             }]
@@ -125,27 +125,27 @@
             {
                 label: 'Consistence Star',
                 data: [{{ $scatter_cs }}],
-                backgroundColor: '#20B2AA'
+                backgroundColor: '#6EB257'
             },
             {
                 label: 'Continuity Learner',
                 data: [{{ $scatter_cl }}],
-                backgroundColor: '#FFA07A'
+                backgroundColor: '#488B49'
             },
             {
                 label: 'High Profesional Learner',
                 data: [{{ $scatter_hpl }}],
-                backgroundColor: '#A0522D'
+                backgroundColor: '#507255'
             },
             {
                 label: 'Inconsistent',
                 data: [{{ $scatter_i }}],
-                backgroundColor: '#FF69B4'
+                backgroundColor: '#283618'
             },
             {
                 label: 'Deadwood',
                 data: [{{ $scatter_d }}],
-                backgroundColor: '#7B68EE'
+                backgroundColor: '#606C38'
             },
             ],
           },

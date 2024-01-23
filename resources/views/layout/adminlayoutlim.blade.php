@@ -2,11 +2,51 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Fiber Academy | Admin</title>
-  <!-- plugins:css -->
+    <meta charset="utf-8">
+    <title>Fiber Academy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    {{-- Shortcut --}}
+    <link rel="shortcut icon" href="/img/thumbnail.png" />
+
+    {{-- Chart.js --}}
+    <script src="/vendors/chart.js/Chart.min.js"></script>
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    {{-- dataTables CSS--}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    {{-- dataTables SCRIPT--}}
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    {{-- tomSelect --}}
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    {{-- tomSelect Script--}}
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+      <!-- plugins:css -->
   <link rel="stylesheet" href="/admin-assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/admin-assets/vendors/base/vendor.bundle.base.css">
   <!-- endinject -->
@@ -17,18 +57,8 @@
   <link rel="stylesheet" href="/admin-assets/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="/images/thumbnail.png" />
-
-  {{-- dataTables CSS--}}
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-  {{-- dataTables SCRIPT--}}
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-
-  {{-- tomSelect --}}
-  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
-  {{-- tomSelect Script--}}
-  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -175,60 +205,10 @@
         </button>
       </div>
     </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/dashboard">
-              <i class="mdi mdi-home menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="mdi mdi-circle-outline menu-icon"></i>
-              <span class="menu-title">Configuration</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/lim-1">Lim 1</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/lim-2">Lim 2</a></li>
-                @if (session('role') == 'super_admin')
-                  <li class="nav-item"> <a class="nav-link" href="/admin/add-user">Add User</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/add-pelatihan">Add Pelatihan</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/add-region">Add Region</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/add-witel">Add Witel</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/edit-showing">Show Setting</a></li>
-                @endif
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </nav>
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          @yield('content')
-        </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
-          </div>
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
+    
   <!-- container-scroller -->
-
+    
+  @yield('content')
   <!-- plugins:js -->
   <script src="/admin-assets/vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -247,17 +227,6 @@
   <script src="/admin-assets/js/data-table.js"></script>
   <script src="/admin-assets/js/jquery.dataTables.js"></script>
   <script src="/admin-assets/js/dataTables.bootstrap4.js"></script>
-   <!-- JavaScript Libraries -->
-   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="lib/wow/wow.min.js"></script>
-   <script src="lib/easing/easing.min.js"></script>
-   <script src="lib/waypoints/waypoints.min.js"></script>
-   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-   <script src="lib/counterup/counterup.min.js"></script>
-
-   <!-- Template Javascript -->
-   <script src="js/main.js"></script>
   <!-- End custom js for this page-->
 
 </body>

@@ -1,6 +1,6 @@
 @inject('helper', 'App\Http\Controllers\helper')
 
-@extends('layouts.layoutlim')
+@extends('layout.adminlayoutlim')
 @section('content')
 
 <div class="row">
@@ -46,7 +46,7 @@
       </table>
     </div>
     <div class="col-6">
-      <img src="img/map.png" style="width: 550px;" alt="">
+      <img src="/img/map.png" style="width: 550px;" alt="">
       <table class="table table-sm table-bordered" id="">
         <thead class="bg-secondary text-light">
             <tr>
@@ -62,37 +62,37 @@
                 <td class="text-center">{{ isset($data_feedback_support['HO']) ? (($data_feedback_support['HO'] + $data_feedback_facilitator['HO'] + $data_feedback_facilities['R-1']) / 3) : '-'}}</td>
             </tr>
             <tr>
-                <td class="text-center"><img src="img/R1.png" alt="" style="width: 20px;"></td>
+                <td class="text-center"><img src="/img/R1.png" alt="" style="width: 20px;"></td>
                 <td class="text-center">Regional 1</td>
                 <td class="text-center">{{ isset($data_feedback_support['R-1']) ? (($data_feedback_support['R-1'] + $data_feedback_facilitator['R-1'] + $data_feedback_facilities['R-1']) / 3) : '-'}}</td>
             </tr>
             <tr>
-                <td class="text-center"><img src="img/R2.png" alt="" style="width: 20px;"></td>
+                <td class="text-center"><img src="/img/R2.png" alt="" style="width: 20px;"></td>
                 <td class="text-center">Regional 2</td>
                 <td class="text-center">{{ isset($data_feedback_support['R-2']) ? (($data_feedback_support['R-2'] + $data_feedback_facilitator['R-2'] + $data_feedback_facilities['R-2']) / 3) : '-'}}</td>
             </tr>
             <tr>
-                <td class="text-center"><img src="img/R3.png" alt="" style="width: 20px;"></td>
+                <td class="text-center"><img src="/img/R3.png" alt="" style="width: 20px;"></td>
                 <td class="text-center">Regional 3</td>
                 <td class="text-center">{{ isset($data_feedback_support['R-3']) ? (($data_feedback_support['R-3'] + $data_feedback_facilitator['R-3'] + $data_feedback_facilities['R-3']) / 3) : '-'}}</td>
             </tr>
             <tr>
-                <td class="text-center"><img src="img/R4.png" alt="" style="width: 20px;"></td>
+                <td class="text-center"><img src="/img/R4.png" alt="" style="width: 20px;"></td>
                 <td class="text-center">Regional 4</td>
                 <td class="text-center">{{ isset($data_feedback_support['R-4']) ? (($data_feedback_support['R-4'] + $data_feedback_facilitator['R-4'] + $data_feedback_facilities['R-4']) / 3) : '-'}}</td>
             </tr>
             <tr>
-                <td class="text-center"><img src="img/R5.png" alt="" style="width: 20px;"></td>
+                <td class="text-center"><img src="/img/R5.png" alt="" style="width: 20px;"></td>
                 <td class="text-center">Regional 5</td>
                 <td class="text-center">{{ isset($data_feedback_support['R-5']) ? (($data_feedback_support['R-5'] + $data_feedback_facilitator['R-5'] + $data_feedback_facilities['R-5']) / 3) : '-'}}</td>
             </tr>
             <tr>
-                <td class="text-center"><img src="img/R6.png" alt="" style="width: 20px;"></td>
+                <td class="text-center"><img src="/img/R6.png" alt="" style="width: 20px;"></td>
                 <td class="text-center">Regional 6</td>
                 <td class="text-center">{{ isset($data_feedback_support['R-6']) ? (($data_feedback_support['R-6'] + $data_feedback_facilitator['R-6'] + $data_feedback_facilities['R-6']) / 3) : '-'}}</td>
             </tr>
             <tr>
-                <td class="text-center"><img src="img/R7.png" alt="" style="width: 20px;"></td>
+                <td class="text-center"><img src="/img/R7.png" alt="" style="width: 20px;"></td>
                 <td class="text-center">Regional 7</td>
                 <td class="text-center">{{ isset($data_feedback_support['R-7']) ? (($data_feedback_support['R-7'] + $data_feedback_facilitator['R-7'] + $data_feedback_facilities['R-7']) / 3) : '-'}}</td>
             </tr>
@@ -120,46 +120,46 @@
     // label: 'My First Dataset',
     data: [{{ $all_feedback_value }}],
     backgroundColor: [
-      '#228B22',
-      '#556B2F',
-      '#BDB76B',
-      '#B8860B',
-      '#D2691E',
-      '#A52A2A',
-      '#FF7F50',
-      '#DC143C',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
-      '#A9A9A9',
+      '#009042',
+      '#60DA5B',
+      '#C6F7C8',
+      '#006937',
+      '#00CB00',
+      '#548C2F',
+      '#104911',
+      '#31E981',
+      '#629677',
+      '#0FFF95',
+      '#06BA63',
+      '#1A281F',
+      '#0B6E4F',
+      '#0E402D',
+      '#295135',
+      '#6EB257',
+      '#488B49',
+      '#507255',
+      '#283618',
+      '#606C38',
+      '#0CCE6B',
+      '#00635D',
+      '#226F54',
+      '#87C38F',
+      '#5BBA6F',
+      '#3FA34D',
+      '#2A9134',
+      '#137547',
+      '#054A29',
+      '#65743A',
+      '#8BBD8B',
+      '#6CAE75',
+      '#053B06',
+      '#0B5D1E',
+      '#139A43',
+      '#60993E',
+      '#A1E44D',
+      '#77FF94',
+      '#285943',
+      '#8CD790',
     ],
     hoverOffset: 4
   }]
@@ -196,8 +196,8 @@
                     {{ $data_feedback_support[$dr->regional_penyelenggara] }},
                   @endforeach
                  ],
-                 backgroundColor: 'rgba(0, 130, 130, 0.5)',
-                 borderColor: 'rgba(0, 130, 130, 1)',
+                 backgroundColor: '#76BB81',
+                 borderColor: '#76BB81',
                  borderWidth: 1
               },{
                  label: 'Facilitator',
@@ -206,8 +206,8 @@
                     {{ $data_feedback_facilitator[$dr->regional_penyelenggara] }},
                   @endforeach
                  ],
-                 backgroundColor: 'rgba(50, 230, 120, 0.5)',
-                 borderColor: 'rgba(50, 230, 120, 1)',
+                 backgroundColor: '#C6F7C8',
+                 borderColor: '#C6F7C8',
                  borderWidth: 1
               },{
                  label: 'Facilities',
@@ -216,8 +216,8 @@
                     {{ $data_feedback_facilities[$dr->regional_penyelenggara] }},
                   @endforeach
                  ],
-                 backgroundColor: 'rgba(190, 50, 20, 0.5)',
-                 borderColor: 'rgba(190, 50, 20, 1)',
+                 backgroundColor: '#006937',
+                 borderColor: '#006937',
                  borderWidth: 1
               },
            ]

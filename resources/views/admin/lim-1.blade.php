@@ -188,7 +188,7 @@
                                             </select>
                                         </div>
                                         <div class="col-2">
-                                            <button type="submit" class="btn btn-sm btn-primary mt-4">Submit</button>
+                                            <button type="submit" class="btn btn-sm btn-primary mt-4">Filter</button>
                                         </div>
                                     </div>
                                 </form>

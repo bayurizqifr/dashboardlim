@@ -33,12 +33,6 @@ Route::get('/home', function () {
     return view('pages.home');
 });
 
-//========================================LIM1
-Route::get('/lim1', [UserPageController::class, 'lim1']);
-//========================================LIM2
-Route::get('/lim2', [UserPageController::class, 'lim2']);
-
-
 //========================================FORM FEEDBACK
 Route::get('/form-feedback', [UserPageController::class, 'form_feedback_page']);
 Route::post('/form-feedback-upload', [UserPageController::class, 'form_feedback_upload']);
@@ -61,6 +55,10 @@ Route::middleware(UserMiddleware::class)->group(function () {
 Route::get('/layout', function () 
 {
     return view('layout.layout');
+});
+Route::get('/adminlayoutlim', function () 
+{
+    return view('layout.adminlayoutlim');
 });
 
 // ============================================================ ADMIN
@@ -86,4 +84,6 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::resource('/admin/add-witel', WitelController::class)->except(['index']);
     Route::get('/admin/edit-showing', [AdminController::class, 'edit_showing']);
     Route::post('/admin/edit-showing-edit', [AdminController::class, 'edit_showing_edit']);
+    Route::get('admin/lim1', [AdminController::class, 'lim1']);
+    Route::get('admin/lim2', [AdminController::class, 'lim2']);
 });
