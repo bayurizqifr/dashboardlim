@@ -77,7 +77,8 @@ class AdminController extends Controller
             $trainingEvaluations = [];
         }
 
-        $data_tahun = DB::table('training_feedback')->select('tahun_pelaksanaan')->distinct()->get();
+        $data_tahun = DB::table('training_evaluations')->select('tahun_pelaksanaan')->distinct()->get();
+        
         $data = [
             'training_evaluations' => $trainingEvaluations,
             'data_tahun' => $data_tahun

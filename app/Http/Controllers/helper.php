@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class helper extends Controller
 {
@@ -114,5 +116,9 @@ class helper extends Controller
             $hasil = DB::table('training_evaluations')->where([['bulan_pelaksanaan', $data_bulan_tahun->bulan_pelaksanaan],['tahun_pelaksanaan', $data_bulan_tahun->tahun_pelaksanaan],['regional', $region]])->count();
             return $hasil;
         }
+    }
+
+    public function print_excel(Request $request){
+        return Excel::download(new ExportData($request->table, $request->bulan, $request->tahun), $request->table.'.xlsx');
     }
 }

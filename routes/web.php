@@ -5,6 +5,7 @@ use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\helper;
 use App\Http\Controllers\WitelController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\UserPageController;
@@ -23,6 +24,8 @@ use App\Http\Controllers\TrainingEvaluationController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::post('/print-excel', [helper::class, 'print_excel']);
 
 Route::get('/', function () {
     return view('welcome');

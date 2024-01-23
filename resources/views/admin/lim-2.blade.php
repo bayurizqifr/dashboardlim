@@ -21,12 +21,12 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-8">
+                    <div class="col-10">
                         <div class="card border-dark rounded">
                             <div class="card-body">
                                 <form action="/admin/lim-2" method="get">
                                     <div class="row">
-                                        <div class="col-5">
+                                        <div class="col-4">
                                             <h6>Bulan Pelaksanaan</h6>
                                             <select name="b" id="" class="form-control form-control-sm border-dark">
                                                 <option value="">Pilih bulan</option>
@@ -44,7 +44,7 @@
                                                 <option value="12" {{ request()->get('b') == 12 ? 'selected' : ''}}>Desember</option>
                                             </select>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-4">
                                             <h6>Tahun Pelaksanaan</h6>
                                             <select name="t" id="" class="form-control form-control-sm border-dark">
                                                 <option value="{{ request()->get('t') ? request()->get('t') : ''}}">{{ request()->get('t') ? request()->get('t') : 'Pilih tahun' }}</option>
@@ -54,10 +54,62 @@
                                             </select>
                                         </div>
                                         <div class="col-2">
-                                            <button type="submit" class="btn btn-sm btn-primary mt-4">Submit</button>
+                                            <button type="submit" class="btn btn-sm btn-primary mt-4 w-100">Filter</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="button" class="btn btn-sm btn-outline-primary w-100 mt-4 w-100" data-toggle="modal" data-target="#downloadFile">
+                                                Download File
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
+
+                                <!-- Modal Download File-->
+                                <div class="modal fade" id="downloadFile" tabindex="-1" role="dialog" aria-labelledby="downloadFileTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Download File</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/print-excel" method="post">
+                                                @csrf
+                                                <input type="hidden" name="table" value="training_evaluations">
+                                                <h6>Bulan Pelaksanaan</h6>
+                                                <select name="bulan" id="" class="form-control form-control-sm border-dark">
+                                                    <option value="">All</option>
+                                                    <option value="1" {{ request()->get('b') == 1 ? 'selected' : ''}}>Januari</option>
+                                                    <option value="2" {{ request()->get('b') == 2 ? 'selected' : ''}}>Februari</option>
+                                                    <option value="3" {{ request()->get('b') == 3 ? 'selected' : ''}}>Maret</option>
+                                                    <option value="4" {{ request()->get('b') == 4 ? 'selected' : ''}}>April</option>
+                                                    <option value="5" {{ request()->get('b') == 5 ? 'selected' : ''}}>Mei</option>
+                                                    <option value="6" {{ request()->get('b') == 6 ? 'selected' : ''}}>Juni</option>
+                                                    <option value="7" {{ request()->get('b') == 7 ? 'selected' : ''}}>Juli</option>
+                                                    <option value="8" {{ request()->get('b') == 8 ? 'selected' : ''}}>Agustus</option>
+                                                    <option value="9" {{ request()->get('b') == 9 ? 'selected' : ''}}>September</option>
+                                                    <option value="10" {{ request()->get('b') == 10 ? 'selected' : ''}}>Oktober</option>
+                                                    <option value="11" {{ request()->get('b') == 11 ? 'selected' : ''}}>November</option>
+                                                    <option value="12" {{ request()->get('b') == 12 ? 'selected' : ''}}>Desember</option>
+                                                </select>
+                                                <br>
+                                                <h6>Tahun Pelaksanaan</h6>
+                                                <select name="tahun" id="" class="form-control form-control-sm border-dark" required>
+                                                    <option value="{{ request()->get('t') ? request()->get('t') : ''}}">{{ request()->get('t') ? request()->get('t') : 'Pilih tahun' }}</option>
+                                                    @foreach ($data_tahun as $row)
+                                                        <option value="{{ $row->tahun_pelaksanaan }}">{{ $row->tahun_pelaksanaan }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <br>
+                                                <button type="submit" class="btn btn-primary py-2">Download</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
